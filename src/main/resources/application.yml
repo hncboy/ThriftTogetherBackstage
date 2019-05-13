@@ -1,6 +1,10 @@
- spring:
+spring:
   datasource:
     url: jdbc:mysql://localhost:3306/thrifttogether?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8080
+  servlet:
+    context-path: /thrifttogether
