@@ -21,8 +21,5 @@
 
     <!-- 添加用户 -->
     <insert id="add" parameterType="User">
-        insert into
-        application(user_id, entrust_id, score, status, create_time, update_time)
-        values(#{userId}, #{entrustId}, #{score}, 1, now(), now())
     </insert>
 </mapper>

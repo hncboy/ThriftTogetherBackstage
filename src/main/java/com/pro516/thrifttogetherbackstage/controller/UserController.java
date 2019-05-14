@@ -1,6 +1,5 @@
 package com.pro516.thrifttogetherbackstage.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pro516.thrifttogetherbackstage.entity.Result;
 import com.pro516.thrifttogetherbackstage.entity.User;
 import com.pro516.thrifttogetherbackstage.service.UserService;

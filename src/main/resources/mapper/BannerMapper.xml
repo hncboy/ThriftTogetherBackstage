@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pro516.thrifttogetherbackstage.mapper.BannerMapper">
+    <resultMap id="bannerResultMap" type="Banner">
+        <result column="banner_cover_url" property="bannerCoverUrl"/>
+    </resultMap>
+
+    <!-- 获取所有轮播图 -->
+    <select id="listBanners" resultMap="bannerResultMap">
+        select * from banner
+    </select>
+</mapper>
