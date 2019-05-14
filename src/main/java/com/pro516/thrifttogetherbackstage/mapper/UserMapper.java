@@ -18,6 +18,7 @@ public interface UserMapper {
 
     /**
      * 根据手机号和密码获取用户id
+     *
      * @param phone
      * @param password
      * @return
@@ -31,4 +32,11 @@ public interface UserMapper {
      * @return
      */
     User findUserByUserId(Integer userId);
+
+    /**
+     * 添加用户
+     *
+     * @param user
+     */
+    void add(User user);
 }

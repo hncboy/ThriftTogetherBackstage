@@ -30,3 +30,4 @@ HELP.md
 /.mvn/
 /mvnw
 /mvnw.cmd
+/src/main/java/com/pro516/thrifttogetherbackstage/util/SmsUtil.java

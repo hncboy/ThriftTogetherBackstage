@@ -28,4 +28,27 @@ public interface UserService {
      * @return
      */
     User findUserByUserId(Integer userId);
+
+    /**
+     * 注册用户
+     *
+     * @param user
+     */
+    void register(User user);
+
+    /**
+     * 发送短信验证码
+     *
+     * @param phone
+     */
+    void createSmsCode(String phone);
+
+    /**
+     * 校验验证码
+     *
+     * @param phone
+     * @param code
+     * @return
+     */
+    boolean checkSmsCode(String phone, String code);
 }

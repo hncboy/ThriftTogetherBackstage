@@ -1,5 +1,7 @@
 package com.pro516.thrifttogetherbackstage.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pro516.thrifttogetherbackstage.entity.Result;
 import com.pro516.thrifttogetherbackstage.entity.User;
 import com.pro516.thrifttogetherbackstage.service.UserService;
 import io.swagger.annotations.Api;
@@ -8,6 +10,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Map;
 
@@ -38,5 +41,21 @@ public class UserController {
     public ResponseEntity<User> findUserByUserId(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(userService.findUserByUserId(userId));
+    }
+
+    @ApiIgnore
+    @PostMapping("/register")
+    public Result register(@RequestBody User user, String smscode) {
+        boolean checkSmsCode = userService.checkSmsCode(user.getPhone(), smscode);
+        if (!checkSmsCode) {
+            return new Result(false, "验证码不正确");
+        }
+        try {
+            userService.register(user);
+            return new Result(true, "注册成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, "注册失败");
+        }
     }
 }

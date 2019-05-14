@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pro516.thrifttogetherbackstage.mapper.CouponMapper">
+    <resultMap id="couponResultMap" type="Coupon">
+        <result column="coupon_name" property="couponName"/>
+        <result column="coupon_integral" property="couponIntegral"/>
+        <result column="coupon_image_url" property="couponImageUrl"/>
+        <result column="discounted_prices" property="discountedPrices"/>
+        <result column="exchange_number" property="exchangeNumber"/>
+        <result column="coupon_total" property="couponTotal"/>
+        <result column="coupon_status" property="couponStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="sell_out_time" property="sellOutTime"/>
+        <result column="removed_time" property="removedTime"/>
+    </resultMap>
+
+    <!-- 获取所有优惠券 -->
+    <select id="listCoupons" resultMap="couponResultMap">
+        select * from coupon where coupon_status = 1
+    </select>
+</mapper>

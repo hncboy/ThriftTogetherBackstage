@@ -39,4 +39,19 @@ public class UserServiceImpl implements UserService {
     public User findUserByUserId(Integer userId) {
         return userMapper.findUserByUserId(userId);
     }
+
+    @Override
+    public void register(User user) {
+
+    }
+
+    @Override
+    public void createSmsCode(String phone) {
+
+    }
+
+    @Override
+    public boolean checkSmsCode(String phone, String code) {
+        return false;
+    }
 }
