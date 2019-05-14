@@ -39,4 +39,11 @@ public interface ShopService {
      * @return
      */
     List<Shop> listShopsBySubdivisionId(Integer cityId, Integer categoryId, Integer subdivisionId);
+
+    /**
+     * 查询每日推荐的店铺
+     *
+     * @return
+     */
+    List<Shop> listRecommendedDailyShops();
 }

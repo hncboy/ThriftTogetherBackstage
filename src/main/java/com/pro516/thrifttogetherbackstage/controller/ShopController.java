@@ -43,4 +43,10 @@ public class ShopController {
         return ResponseEntity.ok(shopService.listShopsByCityId(cityId));
 
     }
+
+    @GetMapping("/recommend")
+    @ApiOperation(value = "查询每日推荐的店铺")
+    public ResponseEntity<List<Shop>> listRecommendedDailyShops() {
+        return ResponseEntity.ok(shopService.listRecommendedDailyShops());
+    }
 }

@@ -33,7 +33,7 @@ public interface ShopMapper {
      * @return
      */
     List<Shop> listShopsByCategoryId(@Param("cityId") Integer cityId,
-                                    @Param("categoryId") Integer categoryId);
+                                     @Param("categoryId") Integer categoryId);
 
     /**
      * 根据城市id，分类id和细分id筛选店铺
@@ -44,6 +44,13 @@ public interface ShopMapper {
      * @return
      */
     List<Shop> listShopsBySubdivisionId(@Param("cityId") Integer cityId,
-                                       @Param("categoryId") Integer categoryId,
-                                       @Param("subdivisionId") Integer subdivisionId);
+                                        @Param("categoryId") Integer categoryId,
+                                        @Param("subdivisionId") Integer subdivisionId);
+
+    /**
+     * 查询每日推荐的店铺
+     *
+     * @return
+     */
+    List<Shop> listRecommendedDailyShops();
 }

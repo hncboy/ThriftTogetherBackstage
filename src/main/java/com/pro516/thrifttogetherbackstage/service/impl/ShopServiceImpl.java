@@ -34,4 +34,9 @@ public class ShopServiceImpl implements ShopService {
     public List<Shop> listShopsBySubdivisionId(Integer cityId, Integer categoryId, Integer subdivisionId) {
         return shopMapper.listShopsBySubdivisionId(cityId, categoryId, subdivisionId);
     }
+
+    @Override
+    public List<Shop> listRecommendedDailyShops() {
+        return shopMapper.listRecommendedDailyShops();
+    }
 }

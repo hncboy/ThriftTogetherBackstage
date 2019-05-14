@@ -1,7 +1,6 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
 import com.pro516.thrifttogetherbackstage.entity.Banner;
-import com.pro516.thrifttogetherbackstage.entity.Coupon;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
