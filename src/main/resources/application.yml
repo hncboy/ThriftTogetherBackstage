@@ -8,3 +8,6 @@ server:
   port: 8080
   servlet:
     context-path: /thrifttogether
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.pro516.thrifttogetherbackstage.entity

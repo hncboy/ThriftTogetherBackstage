@@ -34,7 +34,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("团结")
+                .title("团节")
                 .description("团结对外开放API接口文档")
                 .version("1.0")
                 .license("516pro")
