@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
+import com.pro516.thrifttogetherbackstage.entity.Result;
 import com.pro516.thrifttogetherbackstage.entity.User;
 import com.pro516.thrifttogetherbackstage.mapper.UserMapper;
 import com.pro516.thrifttogetherbackstage.service.UserService;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.pro516.thrifttogetherbackstage.enums.ResultCode.USER_LOGIN_ERROR;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,17 +25,12 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public Map<String, String> login(String username, String password) {
-        Map<String, String> loginInfo = new HashMap<>();
+    public Result login(String username, String password) {
         String userId = String.valueOf(userMapper.getUserId(username, password));
         if (!"null".equals(userId)) {
-            loginInfo.put("status", "success");
-            loginInfo.put("userId", String.valueOf(userMapper.getUserId(username, password)));
-            return loginInfo;
+            return Result.success(findUserByUserId(userMapper.getUserId(username, password)));
         }
-        loginInfo.put("status", "failure");
-        loginInfo.put("failInfo", "手机号或密码错误");
-        return loginInfo;
+        return Result.failure(USER_LOGIN_ERROR);
     }
 
     @Override

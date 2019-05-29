@@ -1,8 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service;
 
+import com.pro516.thrifttogetherbackstage.entity.Result;
 import com.pro516.thrifttogetherbackstage.entity.User;
-
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,7 +18,7 @@ public interface UserService {
      * @param password
      * @return
      */
-    Map<String, String> login(String username, String password);
+    Result login(String username, String password);
 
     /**
      * 根据用户id查询用户信息

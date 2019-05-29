@@ -2,7 +2,6 @@ package com.pro516.thrifttogetherbackstage.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * API 统一返回状态码
@@ -12,7 +11,9 @@ import lombok.Setter;
 public enum ResultCode {
 
     SUCCESS(200, "成功"),
-    FAILURE(404, "失败");
+    FAILURE(404, "失败"),
+
+    USER_LOGIN_ERROR(10001, "手机号或密码错误");
 
     private Integer code;
 

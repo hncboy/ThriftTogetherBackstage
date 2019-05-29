@@ -32,3 +32,4 @@ HELP.md
 /mvnw.cmd
 /src/main/java/com/pro516/thrifttogetherbackstage/util/SmsUtil.java
 /src/test/
+/src/main/resources/application-test.yml
