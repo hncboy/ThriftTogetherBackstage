@@ -14,7 +14,6 @@
         <result column="category_id" property="categoryId"/>
         <result column="subdivision_id" property="subdivisionId"/>
         <result column="city_id" property="cityId"/>
-        <result column="shop_area" property="shopArea"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
 

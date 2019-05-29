@@ -41,20 +41,4 @@ public class UserController {
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
         return ResponseEntity.ok(userService.findUserByUserId(userId));
     }
-
-    @ApiIgnore
-    @PostMapping("/register")
-    public Result register(@RequestBody User user, String smscode) {
-        boolean checkSmsCode = userService.checkSmsCode(user.getPhone(), smscode);
-        if (!checkSmsCode) {
-            return new Result(false, "验证码不正确");
-        }
-        try {
-            userService.register(user);
-            return new Result(true, "注册成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false, "注册失败");
-        }
-    }
 }

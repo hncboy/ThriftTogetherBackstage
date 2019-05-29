@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pro516.thrifttogetherbackstage.mapper.CollectionMapper">
+
+    <resultMap id="collectShopResultMap" type="CollectedShopVO">
+        <result column="shop_name" property="shopName"/>
+        <result column="cover_url" property="coverUrl"/>
+        <result column="average_score" property="averageScore"/>
+        <result column="average_price" property="averagePrice"/>
+        <result column="shop_area" property="shopArea"/>
+    </resultMap>
+
+    <resultMap id="collectProductResultMap" type="CollectedProductVO">
+        <result column="product_name" property="productName"/>
+        <result column="cover_url" property="coverUrl"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="shop_area" property="shopArea"/>
+    </resultMap>
+
+    <!-- 收藏店铺 -->
+    <insert id="addCollectShop" parameterType="Integer">
+        insert into collection (user_id, shop_id, type, collection_time)
+        VALUES(${userId}, ${shopId}, 1, now());
+    </insert>
+
+    <!-- 收藏商品 -->
+    <insert id="addCollectProduct" parameterType="Integer">
+        insert into collection (user_id, product_id, type, collection_time)
+        VALUES(${userId}, ${productId}, 2, now());
+    </insert>
+
+    <!-- 取消收藏店铺 -->
+    <delete id="deleteCollectShop" parameterType="Integer">
+        delete from collection where user_id = ${userId} and shop_id = ${shopId}
+    </delete>
+
+    <!-- 取消收藏商品 -->
+    <delete id="deleteCollectProduct" parameterType="Integer">
+        delete from collection where user_id = ${userId} and product_id = ${productId}
+    </delete>
+
+    <!-- 根据用户id获取用户收藏的的店铺，按时间降序 -->
+    <select id="listShopsByUserId" parameterType="Integer" resultMap="collectShopResultMap">
+        select  id, shop_name, cover_url, average_score, average_price, shop_area from shop
+        where id in (
+        select shop_id from collection where user_id = ${userId} and type = 1 order by collection_time desc )
+        order by field( id,
+        (select group_concat(shop_id order by collection_time desc)
+        from collection where user_id = ${userId} and type = 1)
+        )
+    </select>
+
+    <!-- 根据用户id获取用户收藏的的商品，按时间降序 -->
+    <select id="listProductsByUserId" parameterType="Integer" resultMap="collectProductResultMap">
+        select product.id, product_name, product.cover_url, product_price, shop_name, shop_area
+        from product left join shop on  product.shop_id = shop.id
+        where product.id in (
+        select product_id from collection where user_id = ${userId} and type = 2 order by collection_time desc)
+    </select>
+</mapper>

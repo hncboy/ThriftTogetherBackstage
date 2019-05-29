@@ -11,3 +11,7 @@ server:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.pro516.thrifttogetherbackstage.entity
+
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
