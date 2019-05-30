@@ -4,6 +4,7 @@ import com.pro516.thrifttogetherbackstage.mapper.ScheduleMapper;
 import com.pro516.thrifttogetherbackstage.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,6 +18,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     private ScheduleMapper scheduleMapper;
 
+    @Transactional
     @Override
     public void updateRecommendedDaily() {
         for (int i = 0; i < 6; i++) {

@@ -6,6 +6,7 @@ import com.pro516.thrifttogetherbackstage.mapper.UserMapper;
 import com.pro516.thrifttogetherbackstage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Transactional(readOnly = true)
     @Override
     public Result login(String username, String password) {
         String userId = String.valueOf(userMapper.getUserId(username, password));
@@ -33,6 +35,7 @@ public class UserServiceImpl implements UserService {
         return Result.failure(USER_LOGIN_ERROR);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User findUserByUserId(Integer userId) {
         return userMapper.findUserByUserId(userId);

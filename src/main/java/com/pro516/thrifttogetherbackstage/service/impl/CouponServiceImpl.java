@@ -5,6 +5,7 @@ import com.pro516.thrifttogetherbackstage.mapper.CouponMapper;
 import com.pro516.thrifttogetherbackstage.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class CouponServiceImpl implements CouponService {
     @Autowired
     private CouponMapper couponMapper;
 
+    @Transactional(readOnly = true)
     @Override
     public List<Coupon> listCoupons() {
         return couponMapper.listCoupons();
