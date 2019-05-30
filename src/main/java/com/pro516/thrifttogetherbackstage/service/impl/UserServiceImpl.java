@@ -55,4 +55,13 @@ public class UserServiceImpl implements UserService {
     public boolean checkSmsCode(String phone, String code) {
         return false;
     }
+
+    @Transactional
+    @Override
+    public void updateUserAvator(Integer userId, String avatorUrl) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("avatorUrl", avatorUrl);
+        userMapper.updateUserAvator(map);
+    }
 }

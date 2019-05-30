@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.entity.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -39,6 +40,7 @@ public class SimpleOrderVO {
     @ApiModelProperty(value = "订单状态 1待付款 2待使用 3待评价 4表示已完成 5退款售后")
     private Integer orderStatus;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @ApiModelProperty(value = "订单创建时间")
     private Date createTime;
 }

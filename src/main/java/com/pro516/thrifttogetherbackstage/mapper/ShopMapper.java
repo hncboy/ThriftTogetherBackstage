@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
 import com.pro516.thrifttogetherbackstage.entity.Shop;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public interface ShopMapper {
      * @param cityId
      * @return
      */
-    List<Shop> listShopsByCityId(Integer cityId);
+    List<SimpleShopVO> listShopsByCityId(Integer cityId);
 
     /**
      * 根据城市id和分类id筛选店铺
@@ -32,7 +33,7 @@ public interface ShopMapper {
      * @param categoryId
      * @return
      */
-    List<Shop> listShopsByCategoryId(@Param("cityId") Integer cityId,
+    List<SimpleShopVO> listShopsByCategoryId(@Param("cityId") Integer cityId,
                                      @Param("categoryId") Integer categoryId);
 
     /**
@@ -43,7 +44,7 @@ public interface ShopMapper {
      * @param subdivisionId
      * @return
      */
-    List<Shop> listShopsBySubdivisionId(@Param("cityId") Integer cityId,
+    List<SimpleShopVO> listShopsBySubdivisionId(@Param("cityId") Integer cityId,
                                         @Param("categoryId") Integer categoryId,
                                         @Param("subdivisionId") Integer subdivisionId);
 
@@ -52,5 +53,5 @@ public interface ShopMapper {
      *
      * @return
      */
-    List<Shop> listRecommendedDailyShops();
+    List<SimpleShopVO> listRecommendedDailyShops();
 }

@@ -3,6 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.ShopMapper">
+
+    <resultMap id="simpleShopResultMap" type="SimpleShopVO">
+        <result column="id" property="shopId"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="cover_url" property="shopCoverUrl"/>
+        <result column="average_score" property="averageScore"/>
+        <result column="average_price" property="averagePrice"/>
+        <result column="shop_area" property="shopArea"/>
+    </resultMap>
+
     <resultMap id="shopResultMap" type="Shop">
         <result column="shop_name" property="shopName"/>
         <result column="subdivision_name" property="subdivisionName"/>
@@ -17,23 +27,27 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <sql id="listSimpleShopInfo">
+        select id,shop_name,cover_url,average_score,average_price,shop_area from shop
+    </sql>
+
     <!-- 根据城市id筛选店铺 -->
-    <select id="listShopsByCityId" parameterType="Integer" resultMap="shopResultMap">
-        select * from shop where city_id = #{cityId}
+    <select id="listShopsByCityId" parameterType="Integer" resultMap="simpleShopResultMap">
+        <include refid="listSimpleShopInfo"/> where city_id = #{cityId}
     </select>
 
     <!-- 根据城市id和分类id筛选店铺 -->
-    <select id="listShopsByCategoryId" parameterType="Integer" resultMap="shopResultMap">
-        select * from shop where city_id = #{cityId} and category_id = #{categoryId}
+    <select id="listShopsByCategoryId" parameterType="Integer" resultMap="simpleShopResultMap">
+        <include refid="listSimpleShopInfo"/> where city_id = #{cityId} and category_id = #{categoryId}
     </select>
 
     <!-- 根据城市id，分类id和细分id筛选店铺 -->
-    <select id="listShopsBySubdivisionId" parameterType="Integer" resultMap="shopResultMap">
-        select * from shop where city_id = #{cityId} and category_id = #{categoryId} and subdivision_id = #{subdivisionId}
+    <select id="listShopsBySubdivisionId" parameterType="Integer" resultMap="simpleShopResultMap">
+        <include refid="listSimpleShopInfo"/> where city_id = #{cityId} and category_id = #{categoryId} and subdivision_id = #{subdivisionId}
     </select>
 
     <!-- 查询每日推荐的店铺 -->
-    <select id="listRecommendedDailyShops" resultMap="shopResultMap">
-        select * from shop where id in (select shop_id from recommended_daily where (day(now()) - day(update_date)) = 0)
+    <select id="listRecommendedDailyShops" resultMap="simpleShopResultMap">
+        <include refid="listSimpleShopInfo"/> where id in (select shop_id from recommended_daily where (day(now()) - day(update_date)) = 0)
     </select>
 </mapper>

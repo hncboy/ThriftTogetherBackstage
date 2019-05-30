@@ -19,7 +19,8 @@
         select * from user where id = #{userId}
     </select>
 
-    <!-- 添加用户 -->
-    <insert id="add" parameterType="User">
-    </insert>
+    <!-- 更新用户头像 -->
+    <update id="updateUserAvator" parameterType="Map">
+        update user set avator_url = ${avatorUrl} where id = ${userId}
+    </update>
 </mapper>

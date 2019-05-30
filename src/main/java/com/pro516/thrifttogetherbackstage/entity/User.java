@@ -37,12 +37,4 @@ public class User {
 
     @ApiModelProperty(value = "积分")
     private Integer integral;
-
-    @JsonIgnore
-    @ApiModelProperty(value = "注册时间")
-    private Date createTime;
-
-    @JsonIgnore
-    @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
 }

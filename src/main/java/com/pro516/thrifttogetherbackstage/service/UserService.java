@@ -3,6 +3,8 @@ package com.pro516.thrifttogetherbackstage.service;
 import com.pro516.thrifttogetherbackstage.entity.Result;
 import com.pro516.thrifttogetherbackstage.entity.User;
 
+import java.util.Map;
+
 /**
  * Created by IntelliJ IDEA.
  * User: hncboy
@@ -50,4 +52,12 @@ public interface UserService {
      * @return
      */
     boolean checkSmsCode(String phone, String code);
+
+    /**
+     * 更新用户头像
+     *
+     * @param userId
+     * @param avatorUrl
+     */
+    void updateUserAvator(Integer userId, String avatorUrl);
 }

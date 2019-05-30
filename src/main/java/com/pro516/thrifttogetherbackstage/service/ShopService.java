@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service;
 
 import com.pro516.thrifttogetherbackstage.entity.Shop;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ShopService {
      * @param cityId
      * @return
      */
-    List<Shop> listShopsByCityId(Integer cityId);
+    List<SimpleShopVO> listShopsByCityId(Integer cityId);
 
     /**
      * 根据城市id和分类id筛选店铺
@@ -27,7 +28,7 @@ public interface ShopService {
      * @param categoryId
      * @return
      */
-    List<Shop> listShopsByCategoryId(Integer cityId, Integer categoryId);
+    List<SimpleShopVO> listShopsByCategoryId(Integer cityId, Integer categoryId);
 
 
     /**
@@ -38,12 +39,12 @@ public interface ShopService {
      * @param subdivisionId
      * @return
      */
-    List<Shop> listShopsBySubdivisionId(Integer cityId, Integer categoryId, Integer subdivisionId);
+    List<SimpleShopVO> listShopsBySubdivisionId(Integer cityId, Integer categoryId, Integer subdivisionId);
 
     /**
      * 查询每日推荐的店铺
      *
      * @return
      */
-    List<Shop> listRecommendedDailyShops();
+    List<SimpleShopVO> listRecommendedDailyShops();
 }

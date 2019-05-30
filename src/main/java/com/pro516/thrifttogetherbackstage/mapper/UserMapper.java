@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,4 +41,6 @@ public interface UserMapper {
      * @param user
      */
     void add(User user);
+
+    void updateUserAvator(Map<String, Object> map);
 }
