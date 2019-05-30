@@ -24,13 +24,10 @@ public class Order {
     @ApiModelProperty(value = "用户id")
     private Integer userId;
 
-    @ApiModelProperty(value = "店铺id")
-    private Integer shopId;
-
     @ApiModelProperty(value = "商品id")
     private Integer productId;
 
-    @ApiModelProperty(value = "商品价格")
+    @ApiModelProperty(value = "商品数量")
     private Integer productCount;
 
     @ApiModelProperty(value = "商品总价")
@@ -39,13 +36,13 @@ public class Order {
     @ApiModelProperty(value = "付款方式 1支付宝 2微信")
     private Integer paymentMethod;
 
-    @ApiModelProperty(value = "订单状态 1表示待付款 2表示待使用 3表示待评价 4表示已完成")
+    @ApiModelProperty(value = "订单状态 1待付款 2待使用 3待评价 4已完成 5退款售后")
     private Integer orderStatus;
 
-    @ApiModelProperty(value = "订单创建时间")
+    @ApiModelProperty(value = "下单时间")
     private Date createTime;
 
-    @ApiModelProperty(value = "订单付款时间")
+    @ApiModelProperty(value = "付款时间")
     private Date payTime;
 
     @ApiModelProperty(value = "使用时间")
@@ -53,4 +50,7 @@ public class Order {
 
     @ApiModelProperty(value = "评价时间")
     private Date reviewTime;
+
+    @ApiModelProperty(value = "售后时间")
+    private Date afterSaleTime;
 }

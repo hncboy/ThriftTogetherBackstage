@@ -48,4 +48,33 @@ public class OrderController {
             return Result.failure();
         }
     }
+
+    @DeleteMapping("/{orderNo}")
+    @ApiOperation(value = "删除已完成订单")
+    public Result deleteOrder(
+            @ApiParam(value = "订单号", name = "orderNo") @PathVariable("orderNo") String orderNo) {
+
+        try {
+            orderService.deleteOrder(orderNo);
+            return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
+
+    @PutMapping("/{orderNo}/status/{orderStatus}")
+    @ApiOperation(value = "修改订单状态")
+    public Result deleteOrder(
+            @ApiParam(value = "订单号", name = "orderNo") @PathVariable("orderNo") String orderNo,
+            @ApiParam(value = "订单状态", name = "orderStatus") @PathVariable("orderStatus") Integer orderStatus) {
+
+        try {
+            orderService.updateOrderStatus(orderNo, orderStatus);
+            return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
 }

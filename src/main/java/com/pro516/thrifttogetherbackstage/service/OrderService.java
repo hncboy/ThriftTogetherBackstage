@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service;
 
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -27,4 +28,19 @@ public interface OrderService {
      * @return
      */
     List<SimpleOrderVO> listOrdersByStatus(Integer userId, Integer orderStatus);
+
+    /**
+     * 删除订单
+     *
+     * @param orderNo
+     */
+    void deleteOrder(String orderNo);
+
+    /**
+     * 修改订单状态
+     *
+     * @param orderNo
+     * @param orderStatus
+     */
+    void updateOrderStatus(String orderNo, Integer orderStatus);
 }

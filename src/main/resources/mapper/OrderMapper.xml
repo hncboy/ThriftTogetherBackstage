@@ -4,6 +4,21 @@
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.OrderMapper">
 
+    <resultMap id="orderResultMap" type="Order">
+        <result column="order_no" property="orderNo"/>
+        <result column="user_id" property="userId"/>
+        <result column="productId" property="product_id"/>
+        <result column="product_count" property="productCount"/>
+        <result column="product_amount_total" property="productAmountTotal"/>
+        <result column="payment_method" property="paymentMethod"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="use_time" property="useTime"/>
+        <result column="review_time" property="reviewTime"/>
+        <result column="after_sale_time" property="afterSaleTime"/>
+    </resultMap>
+
     <resultMap id="simpleOrderResultMap" type="SimpleOrderVO">
         <result column="order_no" property="orderNo"/>
         <result column="shop_category_id" property="shopCategoryId"/>
@@ -35,8 +50,29 @@
             AND order_status = ${orderStatus}
             AND product_id = product.id
             AND product.shop_id = shop.id
+            AND is_deleted = 0
         ORDER BY
             order_.create_time DESC
     </select>
 
+    <!-- 删除订单，物理上删除 -->
+    <update id="deleteOrder" parameterType="String">
+        update order_ set is_deleted = 1, delete_time = now()
+        where order_no = #{orderNo} and order_status = 4
+    </update>
+
+    <!--修改订单状态 -->
+    <update id="updateOrderStatus" parameterType="order">
+        update order_ set
+        order_status = ${orderStatus},
+        pay_time = #{payTime, jdbcType=TIMESTAMP},
+        use_time = #{useTime, jdbcType=TIMESTAMP},
+        review_time = #{reviewTime, jdbcType=TIMESTAMP},
+        after_sale_time = #{afterSaleTime, jdbcType=TIMESTAMP}
+        where order_no = #{orderNo}
+    </update>
+
+    <select id="getOrderByOrderNo" parameterType="String" resultMap="orderResultMap">
+        select * from order_ where order_no = #{orderNo}
+    </select>
 </mapper>

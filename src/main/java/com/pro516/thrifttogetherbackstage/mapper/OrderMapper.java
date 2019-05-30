@@ -1,11 +1,13 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
+import com.pro516.thrifttogetherbackstage.entity.Order;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,4 +27,26 @@ public interface OrderMapper {
      */
     List<SimpleOrderVO> listOrdersByStatus(@Param("userId") Integer userId,
                                            @Param("orderStatus") Integer orderStatus);
+
+    /**
+     * 删除订单
+     *
+     * @param orderNo
+     */
+    void deleteOrder(@Param("orderNo") String orderNo);
+
+    /**
+     * 修改订单状态
+     *
+     * @param order
+     */
+    void updateOrderStatus(Order order);
+
+    /**
+     * 根据订单号获取订单详细信息
+     *
+     * @param orderNo
+     * @return
+     */
+    Order getOrderByOrderNo(@Param("orderNo") String orderNo);
 }

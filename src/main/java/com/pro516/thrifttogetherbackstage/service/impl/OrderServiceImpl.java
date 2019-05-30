@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
+import com.pro516.thrifttogetherbackstage.entity.Order;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
 import com.pro516.thrifttogetherbackstage.mapper.OrderMapper;
 import com.pro516.thrifttogetherbackstage.service.OrderService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +40,41 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(readOnly = true)
     @Override
     public List<SimpleOrderVO> listOrdersByStatus(Integer userId, Integer orderStatus) {
+        // 各自状态时间排序
         return orderMapper.listOrdersByStatus(userId, orderStatus);
+    }
+
+    @Transactional
+    @Override
+    public void deleteOrder(String orderNo) {
+        orderMapper.deleteOrder(orderNo);
+    }
+
+    @Transactional
+    @Override
+    public void updateOrderStatus(String orderNo, Integer orderStatus) {
+        Order order = orderMapper.getOrderByOrderNo(orderNo);
+        // 修改订单状态只能从状态为2的时候开始
+        switch (orderStatus) {
+            case 2:
+                order.setOrderStatus(2);
+                order.setPayTime(new Date());
+                break;
+            case 3:
+                order.setOrderStatus(3);
+                order.setUseTime(new Date());
+                break;
+            case 4:
+                order.setOrderStatus(4);
+                order.setReviewTime(new Date());
+                break;
+            case 5:
+                order.setOrderStatus(5);
+                order.setAfterSaleTime(new Date());
+                break;
+            default:
+                break;
+        }
+        orderMapper.updateOrderStatus(order);
     }
 }
