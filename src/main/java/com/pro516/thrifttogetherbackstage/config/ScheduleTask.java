@@ -1,11 +1,9 @@
-package com.pro516.thrifttogetherbackstage.util;
+package com.pro516.thrifttogetherbackstage.config;
 
 import com.pro516.thrifttogetherbackstage.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.

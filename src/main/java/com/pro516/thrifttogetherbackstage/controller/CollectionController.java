@@ -22,7 +22,7 @@ public class CollectionController {
     @Autowired
     private CollectionService collectionService;
 
-    @PostMapping("/user/{userId}/shop/{shopId}")
+    @GetMapping("/user/{userId}/shop/{shopId}")
     @ApiOperation(value = "收藏店铺")
     public Result collectShop(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
@@ -37,7 +37,7 @@ public class CollectionController {
         }
     }
 
-    @PostMapping("/user/{userId}/product/{productId}")
+    @GetMapping("/user/{userId}/product/{productId}")
     @ApiOperation(value = "收藏商品")
     public Result collectProduct(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,

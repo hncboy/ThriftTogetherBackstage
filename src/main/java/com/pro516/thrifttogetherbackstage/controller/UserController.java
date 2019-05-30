@@ -52,7 +52,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/{userId}/avator/{avatorUrl}")
+    @GetMapping("/{userId}/avator/{avatorUrl}")
     @ApiOperation(value = "用户修改头像")
     public Result login(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,

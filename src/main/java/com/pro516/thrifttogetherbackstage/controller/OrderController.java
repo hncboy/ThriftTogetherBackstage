@@ -63,7 +63,7 @@ public class OrderController {
         }
     }
 
-    @PutMapping("/{orderNo}/status/{orderStatus}")
+    @GetMapping("/{orderNo}/status/{orderStatus}")
     @ApiOperation(value = "修改订单状态")
     public Result deleteOrder(
             @ApiParam(value = "订单号", name = "orderNo") @PathVariable("orderNo") String orderNo,

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pro516.thrifttogetherbackstage.mapper.ReviewMapper">
+
+    <resultMap id="simpleReviewResultMap" type="SimpleReviewVO">
+        <result column="review_id" property="reviewId"/>
+        <result column="avator_url" property="avatorUrl"/>
+        <result column="username" property="username"/>
+        <result column="review_content" property="reviewContent"/>
+        <result column="review_pic_url" property="reviewPicUrlList" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
+        <result column="review_score" property="reviewScore"/>
+        <result column="review_time" property="reviewTime"/>
+    </resultMap>
+
+    <!--评价订单-->
+    <insert id="reviewOrder" parameterType="review">
+        INSERT INTO review ( user_id, review_content, review_pic_url, product_id, order_id, review_score, review_time )
+        VALUES(${review.userId},
+            #{review.reviewContent},
+            #{review.reviewPicUrlList, typeHandler=com.pro516.thrifttogetherbackstage.handler.PictureListHandler},
+            ${review.productId},
+            #{review.orderId},
+            ${review.reviewScore},
+            now())
+    </insert>
+
+    <select id="listReviewsByProductId" parameterType="Integer" resultMap="simpleReviewResultMap">
+        SELECT
+            review_id,
+            ( SELECT username FROM USER WHERE id = user_id ) AS username,
+            ( SELECT avator_url FROM USER WHERE id = user_id ) AS avator_url,
+            review_content,
+            review_pic_url,
+            review_score,
+            review_time
+        FROM
+            review
+        WHERE
+            product_id = ${productId}
+        ORDER BY
+            review_time DESC
+    </select>
+</mapper>
