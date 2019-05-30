@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pro516.thrifttogetherbackstage.mapper.OrderMapper">
+
+    <resultMap id="simpleOrderResultMap" type="SimpleOrderVO">
+        <result column="order_no" property="orderNo"/>
+        <result column="shop_category_id" property="shopCategoryId"/>
+        <result column="product_name" property="productName"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="product_cover_url" property="productCoverUrl"/>
+        <result column="product_amount_total" property="productAmountTotal"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 根据订单状态获取订单，按时间降序 -->
+    <select id="listOrdersByStatus" parameterType="Integer" resultMap="simpleOrderResultMap">
+        SELECT
+            order_no,
+            category_id AS shop_category_id,
+            product_name,
+            product.shop_id,
+            product.cover_url AS product_cover_url,
+            product_amount_total,
+            order_status,
+            order_.create_time
+        FROM
+            order_,
+            shop,
+            product
+        WHERE
+            user_id = ${userId}
+            AND order_status = ${orderStatus}
+            AND product_id = product.id
+            AND product.shop_id = shop.id
+        ORDER BY
+            order_.create_time DESC
+    </select>
+
+</mapper>

@@ -44,20 +44,43 @@
 
     <!-- 根据用户id获取用户收藏的的店铺，按时间降序 -->
     <select id="listShopsByUserId" parameterType="Integer" resultMap="collectShopResultMap">
-        select  id, shop_name, cover_url, average_score, average_price, shop_area from shop
-        where id in (
-        select shop_id from collection where user_id = ${userId} and type = 1 order by collection_time desc )
-        order by field( id,
-        (select group_concat(shop_id order by collection_time desc)
-        from collection where user_id = ${userId} and type = 1)
-        )
+        SELECT
+            shop.id,
+            shop_name,
+            cover_url,
+            average_score,
+            average_price,
+            shop_area
+        FROM
+            shop,
+            collection
+        WHERE
+            shop.id = collection.shop_id
+            AND user_id = ${userId}
+            AND type = 1
+        ORDER BY
+            collection_time DESC
     </select>
 
     <!-- 根据用户id获取用户收藏的的商品，按时间降序 -->
     <select id="listProductsByUserId" parameterType="Integer" resultMap="collectProductResultMap">
-        select product.id, product_name, product.cover_url, product_price, shop_name, shop_area
-        from product left join shop on  product.shop_id = shop.id
-        where product.id in (
-        select product_id from collection where user_id = ${userId} and type = 2 order by collection_time desc)
+        SELECT
+            product.id,
+            product_name,
+            product.cover_url,
+            product_price,
+            shop_name,
+            shop_area
+        FROM
+            shop,
+            product,
+            collection
+        WHERE
+            product.id = collection.product_id
+            AND product.shop_id = shop.id
+            AND user_id = ${userId}
+            AND type = 2
+        ORDER BY
+            collection_time DESC
     </select>
 </mapper>

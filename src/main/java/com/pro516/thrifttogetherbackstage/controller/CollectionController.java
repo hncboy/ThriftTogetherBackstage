@@ -22,7 +22,7 @@ public class CollectionController {
     @Autowired
     private CollectionService collectionService;
 
-    @PostMapping("user/{userId}/shop/{shopId}")
+    @PostMapping("/user/{userId}/shop/{shopId}")
     @ApiOperation(value = "收藏店铺")
     public Result collectShop(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
@@ -37,7 +37,7 @@ public class CollectionController {
         }
     }
 
-    @PostMapping("user/{userId}/product/{productId}")
+    @PostMapping("/user/{userId}/product/{productId}")
     @ApiOperation(value = "收藏商品")
     public Result collectProduct(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
@@ -51,7 +51,7 @@ public class CollectionController {
         }
     }
 
-    @PutMapping("user/{userId}/shop/{shopId}")
+    @DeleteMapping("/user/{userId}/shop/{shopId}")
     @ApiOperation(value = "取消收藏店铺")
     public Result cancelCollectShop(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
@@ -66,7 +66,7 @@ public class CollectionController {
         }
     }
 
-    @PutMapping("user/{userId}/product/{productId}")
+    @DeleteMapping("/user/{userId}/product/{productId}")
     @ApiOperation(value = "取消收藏商品")
     public Result cancelCollectProduct(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
@@ -80,7 +80,7 @@ public class CollectionController {
         }
     }
 
-    @GetMapping("user/{userId}/product")
+    @GetMapping("/user/{userId}/product")
     @ApiOperation(value = "获取用户收藏的商品")
     public Result listProductsByUserId(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
@@ -92,7 +92,7 @@ public class CollectionController {
         }
     }
 
-    @GetMapping("user/{userId}/shop")
+    @GetMapping("/user/{userId}/shop")
     @ApiOperation(value = "获取用户收藏的店铺")
     public Result listShopsByUserId(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {

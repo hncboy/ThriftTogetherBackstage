@@ -34,6 +34,6 @@
 
     <!-- 查询每日推荐的店铺 -->
     <select id="listRecommendedDailyShops" resultMap="shopResultMap">
-        select * from shop where id in (select id from recommended_daily where (day(now()) - day(update_date)) = 0)
+        select * from shop where id in (select shop_id from recommended_daily where (day(now()) - day(update_date)) = 0)
     </select>
 </mapper>

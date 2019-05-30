@@ -44,13 +44,11 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public List<CollectedShopVO> listShopsByUserId(Integer userId) {
-        // FIXME 按收藏时间排序
         return collectionMapper.listShopsByUserId(userId);
     }
 
     @Override
     public List<CollectedProductVO> listProductsByUserId(Integer userId) {
-        // FIXME 按收藏时间排序
         return collectionMapper.listProductsByUserId(userId);
     }
 }
