@@ -94,4 +94,18 @@ public class UserController {
             return Result.failure();
         }
     }
+
+    @GetMapping("/{userId}/feedback/{content}")
+    @ApiOperation(value = "用户反馈意见")
+    public Result userFeedback(
+            @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
+            @ApiParam(value = "反馈内容", name = "content") @PathVariable("content") String content) {
+        try {
+            userService.userFeedback(userId, content);
+            return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
 }

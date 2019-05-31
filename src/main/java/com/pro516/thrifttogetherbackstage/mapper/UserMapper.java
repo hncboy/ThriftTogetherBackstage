@@ -61,4 +61,12 @@ public interface UserMapper {
      * @param shopId
      */
     void insertRecentlyBrowseShop(@Param("userId") Integer userId, @Param("shopId") Integer shopId);
+
+    /**
+     * 插入用户的反馈意见
+     *
+     * @param map
+     * @return
+     */
+    void insertOpinion(Map<String, Object> map);
 }

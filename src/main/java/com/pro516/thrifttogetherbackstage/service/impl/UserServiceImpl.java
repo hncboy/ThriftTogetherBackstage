@@ -83,4 +83,13 @@ public class UserServiceImpl implements UserService {
         }
         return simpleShopVOList;
     }
+
+    @Transactional
+    @Override
+    public void userFeedback(Integer userId, String content) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("content", content);
+        userMapper.insertOpinion(map);
+    }
 }

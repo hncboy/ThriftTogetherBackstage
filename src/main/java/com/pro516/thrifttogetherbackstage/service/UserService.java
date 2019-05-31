@@ -71,4 +71,12 @@ public interface UserService {
      * @return
      */
     List<SimpleShopVO> listUserRecentlyBrowseShops(@Param("userId") Integer userId);
+
+    /**
+     * 插入用户的反馈意见
+     *
+     * @param userId
+     * @param content
+     */
+    void userFeedback(Integer userId, String content);
 }

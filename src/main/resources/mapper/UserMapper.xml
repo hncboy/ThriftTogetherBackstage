@@ -45,4 +45,9 @@
         VALUES ( ${userId}, ${shopId}, now())
     </insert>
 
+    <!-- 插入一条用户的反馈意见 -->
+    <insert id="insertOpinion" parameterType="Map">
+        INSERT INTO feedback ( user_id, content, commit_time )
+        VALUES ( ${userId}, #{content}, now())
+    </insert>
 </mapper>
