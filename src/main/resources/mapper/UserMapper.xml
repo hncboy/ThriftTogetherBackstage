@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.UserMapper">
+
     <resultMap id="userResultMap" type="User">
         <result column="avator_url" property="avatorUrl"/>
         <result column="create_time" property="createTime"/>
@@ -23,4 +24,25 @@
     <update id="updateUserAvator" parameterType="Map">
         update user set avator_url = ${avatorUrl} where id = ${userId}
     </update>
+
+    <!-- 根据用户id获取用户最近浏览店铺id -->
+    <select id="listUserRecentlyBrowseShops" parameterType="Integer" resultType="Integer">
+        SELECT
+            shop_id
+        FROM
+            recently_browse
+        WHERE
+            user_id = ${userId}
+        GROUP BY
+            shop_id
+        ORDER BY
+            max( browse_time ) DESC
+    </select>
+
+    <!-- 插入一条用户的浏览店铺 -->
+    <insert id="insertRecentlyBrowseShop" parameterType="Integer">
+        INSERT INTO recently_browse ( user_id, shop_id, browse_time )
+        VALUES ( ${userId}, ${shopId}, now())
+    </insert>
+
 </mapper>

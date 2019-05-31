@@ -82,4 +82,16 @@ public class UserController {
             return Result.failure();
         }
     }
+
+    @GetMapping("/{userId}/recentlybrowse")
+    @ApiOperation(value = "根据用户id获取用户最近浏览店铺记录")
+    public Result listUserRecentlyBrowseShops(
+            @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
+        try {
+            return Result.success(userService.listUserRecentlyBrowseShops(userId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
 }

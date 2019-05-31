@@ -1,10 +1,12 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
 import com.pro516.thrifttogetherbackstage.entity.User;
+import com.pro516.thrifttogetherbackstage.entity.vo.CollectedShopVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -43,4 +45,20 @@ public interface UserMapper {
     void add(User user);
 
     void updateUserAvator(Map<String, Object> map);
+
+    /**
+     * 根据用户id获取用户最近浏览店铺id
+     *
+     * @param userId
+     * @return
+     */
+    List<Integer> listUserRecentlyBrowseShops(@Param("userId") Integer userId);
+
+    /**
+     * 插入一条用户的浏览店铺记录
+     *
+     * @param userId
+     * @param shopId
+     */
+    void insertRecentlyBrowseShop(@Param("userId") Integer userId, @Param("shopId") Integer shopId);
 }

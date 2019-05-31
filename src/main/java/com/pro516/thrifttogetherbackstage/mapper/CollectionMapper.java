@@ -2,6 +2,7 @@ package com.pro516.thrifttogetherbackstage.mapper;
 
 import com.pro516.thrifttogetherbackstage.entity.vo.CollectedProductVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.CollectedShopVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -55,7 +56,7 @@ public interface CollectionMapper {
      * @param userId
      * @return
      */
-    List<CollectedShopVO> listShopsByUserId(@Param("userId")Integer userId);
+    List<SimpleShopVO> listShopsByUserId(@Param("userId")Integer userId);
 
     /**
      * 根据用户id获取用户收藏的的商品

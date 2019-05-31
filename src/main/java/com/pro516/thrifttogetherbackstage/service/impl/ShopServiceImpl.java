@@ -3,6 +3,7 @@ package com.pro516.thrifttogetherbackstage.service.impl;
 import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 import com.pro516.thrifttogetherbackstage.mapper.ShopMapper;
+import com.pro516.thrifttogetherbackstage.mapper.UserMapper;
 import com.pro516.thrifttogetherbackstage.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private ShopMapper shopMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -51,7 +55,7 @@ public class ShopServiceImpl implements ShopService {
     public ShopDetailsVO getShopDetails(Integer shopId, Integer userId) {
         ShopDetailsVO shopDetailsVO = shopMapper.getShopDetails(shopId, userId);
         shopDetailsVO.setSimpleProductList(shopMapper.listSimpleProductsByShopId(shopId));
-        // TODO 加入用户的浏览记录
+        userMapper.insertRecentlyBrowseShop(userId, shopId);
         return shopDetailsVO;
     }
 }

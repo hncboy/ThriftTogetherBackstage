@@ -55,6 +55,11 @@
         <include refid="listSimpleShopInfo"/> where id in (select shop_id from recommended_daily where (day(now()) - day(update_date)) = 0)
     </select>
 
+    <!-- 根据店铺id查询简单店铺信息 -->
+    <select id="getSimpleShopByShopId" parameterType="Integer" resultMap="simpleShopResultMap">
+        <include refid="listSimpleShopInfo"/> where id = ${shopId}
+    </select>
+
     <!-- 根据用户id和店铺id查询店铺详情 -->
     <select id="getShopDetails" parameterType="Integer" resultMap="shopDetailsResultMap">
         SELECT

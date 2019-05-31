@@ -4,9 +4,10 @@
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.CollectionMapper">
 
-    <resultMap id="collectShopResultMap" type="CollectedShopVO">
+    <resultMap id="simpleShopResultMap" type="SimpleShopVO">
+        <result column="id" property="shopId"/>
         <result column="shop_name" property="shopName"/>
-        <result column="cover_url" property="coverUrl"/>
+        <result column="cover_url" property="shopCoverUrl"/>
         <result column="average_score" property="averageScore"/>
         <result column="average_price" property="averagePrice"/>
         <result column="shop_area" property="shopArea"/>
@@ -43,7 +44,7 @@
     </delete>
 
     <!-- 根据用户id获取用户收藏的的店铺，按时间降序 -->
-    <select id="listShopsByUserId" parameterType="Integer" resultMap="collectShopResultMap">
+    <select id="listShopsByUserId" parameterType="Integer" resultMap="simpleShopResultMap">
         SELECT
             shop.id,
             shop_name,

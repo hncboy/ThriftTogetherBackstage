@@ -1,8 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
 import com.pro516.thrifttogetherbackstage.entity.vo.CollectedProductVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.CollectedShopVO;
-import com.pro516.thrifttogetherbackstage.mapper.BannerMapper;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 import com.pro516.thrifttogetherbackstage.mapper.CollectionMapper;
 import com.pro516.thrifttogetherbackstage.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<CollectedShopVO> listShopsByUserId(Integer userId) {
+    public List<SimpleShopVO> listShopsByUserId(Integer userId) {
         return collectionMapper.listShopsByUserId(userId);
     }
 

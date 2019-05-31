@@ -57,6 +57,14 @@ public interface ShopMapper {
     List<SimpleShopVO> listRecommendedDailyShops();
 
     /**
+     * 根据店铺id查询简单店铺信息
+     *
+     * @param shopId
+     * @return
+     */
+    SimpleShopVO getSimpleShopByShopId(@Param("shopId") Integer shopId);
+
+    /**
      * 根据用户id和店铺id查询店铺详情
      *
      * @param shopId
@@ -64,7 +72,7 @@ public interface ShopMapper {
      * @return
      */
     ShopDetailsVO getShopDetails(@Param("shopId") Integer shopId,
-                                       @Param("userId") Integer userId);
+                                 @Param("userId") Integer userId);
 
     /**
      * 根据店铺id查询改店铺的所有商品

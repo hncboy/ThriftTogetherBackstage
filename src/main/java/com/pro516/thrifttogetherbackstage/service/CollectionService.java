@@ -1,7 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service;
 
 import com.pro516.thrifttogetherbackstage.entity.vo.CollectedProductVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.CollectedShopVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public interface CollectionService {
      * @param userId
      * @return
      */
-    List<CollectedShopVO> listShopsByUserId(Integer userId);
+    List<SimpleShopVO> listShopsByUserId(Integer userId);
 
     /**
      * 根据用户id获取用户收藏的的商品
