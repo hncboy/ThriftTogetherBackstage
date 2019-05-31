@@ -1,6 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service;
 
-import com.pro516.thrifttogetherbackstage.entity.Shop;
+import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 
 import java.util.List;
@@ -47,4 +47,13 @@ public interface ShopService {
      * @return
      */
     List<SimpleShopVO> listRecommendedDailyShops();
+
+    /**
+     * 根据用户id和店铺id查询店铺详情
+     *
+     * @param shopId
+     * @param userId
+     * @return
+     */
+    ShopDetailsVO getShopDetails(Integer shopId, Integer userId);
 }

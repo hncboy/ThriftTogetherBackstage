@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
-import com.pro516.thrifttogetherbackstage.entity.Shop;
+import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleProductVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -34,7 +35,7 @@ public interface ShopMapper {
      * @return
      */
     List<SimpleShopVO> listShopsByCategoryId(@Param("cityId") Integer cityId,
-                                     @Param("categoryId") Integer categoryId);
+                                             @Param("categoryId") Integer categoryId);
 
     /**
      * 根据城市id，分类id和细分id筛选店铺
@@ -45,8 +46,8 @@ public interface ShopMapper {
      * @return
      */
     List<SimpleShopVO> listShopsBySubdivisionId(@Param("cityId") Integer cityId,
-                                        @Param("categoryId") Integer categoryId,
-                                        @Param("subdivisionId") Integer subdivisionId);
+                                                @Param("categoryId") Integer categoryId,
+                                                @Param("subdivisionId") Integer subdivisionId);
 
     /**
      * 查询每日推荐的店铺
@@ -54,4 +55,22 @@ public interface ShopMapper {
      * @return
      */
     List<SimpleShopVO> listRecommendedDailyShops();
+
+    /**
+     * 根据用户id和店铺id查询店铺详情
+     *
+     * @param shopId
+     * @param userId
+     * @return
+     */
+    ShopDetailsVO getShopDetails(@Param("shopId") Integer shopId,
+                                       @Param("userId") Integer userId);
+
+    /**
+     * 根据店铺id查询改店铺的所有商品
+     *
+     * @param shopId
+     * @return
+     */
+    List<SimpleProductVO> listSimpleProductsByShopId(@Param("shopId") Integer shopId);
 }

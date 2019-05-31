@@ -16,7 +16,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
-@ApiModel(value = "SimpleOrder 显示的简单订单信息")
+@ApiModel(value = "SimpleOrderVO 显示的简单订单信息")
 public class SimpleOrderVO {
 
     @ApiModelProperty(value = "订单号")

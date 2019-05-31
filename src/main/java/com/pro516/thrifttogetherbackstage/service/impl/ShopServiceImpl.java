@@ -1,6 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
-import com.pro516.thrifttogetherbackstage.entity.Shop;
+import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 import com.pro516.thrifttogetherbackstage.mapper.ShopMapper;
 import com.pro516.thrifttogetherbackstage.service.ShopService;
@@ -44,5 +44,14 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public List<SimpleShopVO> listRecommendedDailyShops() {
         return shopMapper.listRecommendedDailyShops();
+    }
+
+    @Transactional
+    @Override
+    public ShopDetailsVO getShopDetails(Integer shopId, Integer userId) {
+        ShopDetailsVO shopDetailsVO = shopMapper.getShopDetails(shopId, userId);
+        shopDetailsVO.setSimpleProductList(shopMapper.listSimpleProductsByShopId(shopId));
+        // TODO 加入用户的浏览记录
+        return shopDetailsVO;
     }
 }

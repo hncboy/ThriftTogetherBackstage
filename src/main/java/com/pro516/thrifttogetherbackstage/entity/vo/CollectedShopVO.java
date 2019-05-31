@@ -13,7 +13,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@ApiModel(value = "CollectedShop 收藏的店铺")
+@ApiModel(value = "CollectedShopVO 收藏的店铺")
 public class CollectedShopVO {
 
     @ApiModelProperty(value = "店铺id")

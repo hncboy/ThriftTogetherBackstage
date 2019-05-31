@@ -13,18 +13,22 @@
         <result column="shop_area" property="shopArea"/>
     </resultMap>
 
-    <resultMap id="shopResultMap" type="Shop">
+    <resultMap id="simpleProductResultMap" type="SimpleProductVO">
+        <result column="product_id" property="productId"/>
+        <result column="product_cover_url" property="productCoverUrl"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_use_time" property="productUseTime"/>
+        <result column="product_price" property="productPrice"/>
+    </resultMap>
+
+    <resultMap id="shopDetailsResultMap" type="ShopDetailsVO">
+        <result column="shop_id" property="shopId"/>
         <result column="shop_name" property="shopName"/>
-        <result column="subdivision_name" property="subdivisionName"/>
-        <result column="cover_url" property="coverUrl"/>
-        <result column="average_score" property="averageScore"/>
-        <result column="average_price" property="averagePrice"/>
-        <result column="shop_area" property="shopArea"/>
+        <result column="shop_cover_url" property="shopCoverUrl"/>
+        <result column="shop_average_score" property="shopAverageScore"/>
+        <result column="shop_average_price" property="shopAveragePrice"/>
         <result column="shop_address" property="shopAddress"/>
-        <result column="category_id" property="categoryId"/>
-        <result column="subdivision_id" property="subdivisionId"/>
-        <result column="city_id" property="cityId"/>
-        <result column="create_time" property="createTime"/>
+        <result column="is_collected" property="isCollected"/>
     </resultMap>
 
     <sql id="listSimpleShopInfo">
@@ -49,5 +53,37 @@
     <!-- 查询每日推荐的店铺 -->
     <select id="listRecommendedDailyShops" resultMap="simpleShopResultMap">
         <include refid="listSimpleShopInfo"/> where id in (select shop_id from recommended_daily where (day(now()) - day(update_date)) = 0)
+    </select>
+
+    <!-- 根据用户id和店铺id查询店铺详情 -->
+    <select id="getShopDetails" parameterType="Integer" resultMap="shopDetailsResultMap">
+        SELECT
+            id AS shop_id,
+            shop_name,
+            cover_url AS shop_cover_url,
+            average_score AS shop_average_score,
+            average_price AS shop_average_price,
+            shop_address,
+            ( SELECT count(*) FROM collection WHERE shop_id = ${shopId} AND user_id = ${userId} AND type = 1 ) AS is_collected
+        FROM
+            shop
+        WHERE
+            id = ${shopId}
+    </select>
+
+    <!-- 根据店铺id查询改店铺的所有商品 -->
+    <select id="listSimpleProductsByShopId" parameterType="Integer" resultMap="simpleProductResultMap">
+        SELECT
+            id AS product_id,
+            cover_url AS product_cover_url,
+            product_name,
+            use_time AS product_use_time,
+            product_price
+        FROM
+            product
+        WHERE
+            shop_id = ${shopId}
+        ORDER BY
+            publish_time DESC
     </select>
 </mapper>

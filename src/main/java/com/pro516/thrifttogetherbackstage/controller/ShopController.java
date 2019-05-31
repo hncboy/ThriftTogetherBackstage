@@ -72,4 +72,18 @@ public class ShopController {
     public Result listRecommendedDailyShops() {
         return Result.success(shopService.listRecommendedDailyShops());
     }
+
+    @GetMapping("/{shopId}/user/{userId}")
+    @ApiOperation(value = "根据用户id和店铺id查询店铺详情")
+    public Result getShopDetails(
+            @ApiParam(value = "店铺id", name = "shopId") @PathVariable("shopId") Integer shopId,
+            @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
+
+        try {
+            return Result.success(shopService.getShopDetails(shopId, userId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
 }

@@ -33,6 +33,7 @@ public class ReviewServiceImpl implements ReviewService {
         reviewMapper.reviewOrder(review);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<SimpleReviewVO> listReviewsByProductId(Integer productId) {
         return reviewMapper.listReviewsByProductId(productId);
