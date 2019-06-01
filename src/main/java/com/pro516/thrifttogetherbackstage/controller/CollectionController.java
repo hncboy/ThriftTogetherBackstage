@@ -42,6 +42,7 @@ public class CollectionController {
     public Result collectProduct(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
             @ApiParam(value = "商品id", name = "productId") @PathVariable("productId") Integer productId) {
+
         try {
             collectionService.collectProduct(userId, productId);
             return Result.success();
@@ -71,6 +72,7 @@ public class CollectionController {
     public Result cancelCollectProduct(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
             @ApiParam(value = "商品id", name = "productId") @PathVariable("productId") Integer productId) {
+
         try {
             collectionService.cancelCollectProduct(userId, productId);
             return Result.success();
@@ -84,6 +86,7 @@ public class CollectionController {
     @ApiOperation(value = "获取用户收藏的商品")
     public Result listProductsByUserId(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
+
         try {
             return Result.success(collectionService.listProductsByUserId(userId));
         } catch (Exception e) {
@@ -96,6 +99,7 @@ public class CollectionController {
     @ApiOperation(value = "获取用户收藏的店铺")
     public Result listShopsByUserId(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
+
         try {
             return Result.success(collectionService.listShopsByUserId(userId));
         } catch (Exception e) {

@@ -76,12 +76,7 @@ public class ShopController {
             @ApiParam(value = "店铺id", name = "shopId") @PathVariable("shopId") Integer shopId,
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
 
-        try {
-            return Result.success(shopService.getShopDetails(shopId, userId));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Result.failure();
-        }
+        return Result.success(shopService.getShopDetails(shopId, userId));
     }
 
     @GetMapping("/city/{cityId}/lat/{userLat}/lng/{userLng}")

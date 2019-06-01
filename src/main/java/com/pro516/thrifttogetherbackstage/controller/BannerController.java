@@ -26,11 +26,6 @@ public class BannerController {
     @GetMapping
     @ApiOperation(value = "获取全部轮播图")
     public Result listBanners() {
-        try {
-            return Result.success(bannerService.listBanners());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Result.failure();
-        }
+        return Result.success(bannerService.listBanners());
     }
 }
