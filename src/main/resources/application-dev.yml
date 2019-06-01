@@ -4,6 +4,10 @@ spring:
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    elasticsearch:
+      cluster-nodes: 127.0.0.1:9300
+
 server:
   port: 8080
   servlet:

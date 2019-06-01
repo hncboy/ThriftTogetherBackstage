@@ -62,4 +62,15 @@ public interface ShopService {
      * 更新每日推荐
      */
     void updateRecommendedDaily();
+
+    /**
+     * 根据城市id和关键字搜索店铺
+     *
+     * @param cityId
+     * @param keyword
+     * @param start
+     * @param size
+     * @return
+     */
+    List<SimpleShopVO> searchShops(Integer cityId, String keyword, Integer start, Integer size);
 }

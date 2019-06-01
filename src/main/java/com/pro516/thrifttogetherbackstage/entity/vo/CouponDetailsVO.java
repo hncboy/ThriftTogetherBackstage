@@ -7,7 +7,6 @@ package com.pro516.thrifttogetherbackstage.entity.vo;
  * Time: 9:41
  */
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

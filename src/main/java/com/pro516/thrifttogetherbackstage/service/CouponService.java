@@ -4,7 +4,6 @@ import com.pro516.thrifttogetherbackstage.entity.Result;
 import com.pro516.thrifttogetherbackstage.entity.UserCoupon;
 import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleCouponVO;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

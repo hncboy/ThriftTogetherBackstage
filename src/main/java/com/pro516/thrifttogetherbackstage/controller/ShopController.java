@@ -6,10 +6,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.print.attribute.IntegerSyntax;
 
 /**
  * Created by IntelliJ IDEA.
@@ -71,6 +70,22 @@ public class ShopController {
     @ApiOperation(value = "查询每日推荐的店铺")
     public Result listRecommendedDailyShops() {
         return Result.success(shopService.listRecommendedDailyShops());
+    }
+
+    @GetMapping("/city/{cityId}/search/{keyword}")
+    @ApiOperation(value = "根据关键词搜索店铺")
+    public Result searchShops(
+            @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId,
+            @ApiParam(value = "关键词", name = "keyword") @PathVariable("keyword") String keyword,
+            @ApiParam(value = "起始页 默认0", name = "start") @RequestParam(value = "start", defaultValue = "0") Integer start,
+            @ApiParam(value = "每页多少条 默认20", name = "size") @RequestParam(value = "size", defaultValue = "20") Integer size) {
+
+        try {
+            return Result.success(shopService.searchShops(cityId, keyword, start, size));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
     }
 
     @GetMapping("/{shopId}/user/{userId}")

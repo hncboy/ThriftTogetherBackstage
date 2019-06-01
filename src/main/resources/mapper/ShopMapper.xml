@@ -6,6 +6,7 @@
 
     <resultMap id="simpleShopResultMap" type="SimpleShopVO">
         <result column="id" property="shopId"/>
+        <result column="city_id" property="cityId"/>
         <result column="shop_name" property="shopName"/>
         <result column="cover_url" property="shopCoverUrl"/>
         <result column="average_score" property="averageScore"/>
@@ -32,8 +33,13 @@
     </resultMap>
 
     <sql id="listSimpleShopInfo">
-        select id,shop_name,cover_url,average_score,average_price,shop_area from shop
+        select id,city_id,shop_name,cover_url,average_score,average_price,shop_area from shop
     </sql>
+
+    <!-- 查询全部店铺 -->
+    <select id="listShops" parameterType="Integer" resultMap="simpleShopResultMap">
+        <include refid="listSimpleShopInfo"/>
+    </select>
 
     <!-- 根据城市id筛选店铺 -->
     <select id="listShopsByCityId" parameterType="Integer" resultMap="simpleShopResultMap">
@@ -95,6 +101,11 @@
     <!-- 根据店铺id查询简单店铺信息 -->
     <select id="getShopIdByProductId" parameterType="Integer" resultType="Integer">
         select shop_id from product where id = ${productId}
+    </select>
+
+    <!-- 查询每日推荐店铺的数量 -->
+    <select id="listRecommendedDailyCount" resultType="Integer">
+        select count(*) from recommended_daily where (day(now()) - day(update_date)) = 0
     </select>
 
 </mapper>

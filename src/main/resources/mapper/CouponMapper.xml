@@ -22,6 +22,7 @@
     <resultMap id="userCouponResultMap" type="UserCoupon">
         <result column="id" property="userCouponId"/>
         <result column="coupon_image_url" property="couponImageUrl"/>
+        <result column="coupon_name" property="couponName"/>
         <result column="discounted_price" property="couponDiscountedPrice"/>
         <result column="expired_date" property="expiredDate"/>
         <result column="user_coupon_status" property="userCouponStatus"/>
@@ -60,6 +61,7 @@
     <select id="listUserCoupons" parameterType="Integer" resultMap="userCouponResultMap">
         SELECT
             id,
+            ( SELECT coupon_name FROM coupon WHERE coupon_id = id ) as coupon_name,
             ( SELECT coupon_image_url FROM coupon WHERE coupon_id = id ) as coupon_image_url,
             ( SELECT discounted_price FROM coupon WHERE coupon_id = id ) as discounted_price,
             ( SELECT expired_date FROM coupon WHERE coupon_id = id ) as expired_date,

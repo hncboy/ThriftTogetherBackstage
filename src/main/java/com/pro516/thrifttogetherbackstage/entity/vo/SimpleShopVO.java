@@ -1,9 +1,12 @@
 package com.pro516.thrifttogetherbackstage.entity.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,9 +16,11 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@Document(indexName = "thrifttogether", type = "shop")
 @ApiModel(value = "SimpleShopVO 显示的简单店铺信息")
 public class SimpleShopVO {
 
+    @Id
     @ApiModelProperty(value = "店铺id")
     private Integer shopId;
 
@@ -33,4 +38,7 @@ public class SimpleShopVO {
 
     @ApiModelProperty(value = "店铺区域")
     private String shopArea;
+
+    @ApiModelProperty(value = "城市id")
+    private Integer cityId;
 }

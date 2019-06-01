@@ -20,6 +20,13 @@ import java.util.List;
 public interface ShopMapper {
 
     /**
+     * 查询所有店铺
+     *
+     * @return
+     */
+    List<SimpleShopVO> listShops();
+
+    /**
      * 根据城市id筛选店铺
      *
      * @param cityId
@@ -95,7 +102,7 @@ public interface ShopMapper {
      *
      * @return
      */
-    Integer listRecommendedDaily();
+    Integer listRecommendedDailyCount();
 
     /**
      * 更新每日推荐
