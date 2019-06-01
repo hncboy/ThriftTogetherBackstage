@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pro516.thrifttogetherbackstage.mapper.SearchMapper">
+
+    <!-- 根据手机号和密码查询用户 -->
+    <select id="getUserId" parameterType="String" resultType="Integer">
+        select id from user where phone = #{phone} and password = #{password}
+    </select>
+
+    <!-- 根据用户id和返回记录数查询搜索记录 -->
+    <select id="listSearchRecordsByUserId" parameterType="Integer" resultType="String">
+        SELECT
+            keyword
+        FROM
+            search_record
+        WHERE
+            user_id = ${userId}
+        GROUP BY
+            keyword
+        ORDER BY
+            max( search_time ) DESC
+            LIMIT 0, ${recordNum}
+    </select>
+
+    <!-- 插入用户搜索记录 -->
+    <insert id="insertSearchRecord" parameterType="Map">
+        INSERT INTO search_record ( keyword, user_id, city_id, search_time )
+        VALUES ( #{keyword}, ${userId}, ${cityId}, now())
+    </insert>
+</mapper>

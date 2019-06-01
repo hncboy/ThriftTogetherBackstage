@@ -8,8 +8,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.IntegerSyntax;
-
 /**
  * Created by IntelliJ IDEA.
  * User: hncboy
@@ -72,22 +70,6 @@ public class ShopController {
         return Result.success(shopService.listRecommendedDailyShops());
     }
 
-    @GetMapping("/city/{cityId}/search/{keyword}")
-    @ApiOperation(value = "根据关键词搜索店铺")
-    public Result searchShops(
-            @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId,
-            @ApiParam(value = "关键词", name = "keyword") @PathVariable("keyword") String keyword,
-            @ApiParam(value = "起始页 默认0", name = "start") @RequestParam(value = "start", defaultValue = "0") Integer start,
-            @ApiParam(value = "每页多少条 默认20", name = "size") @RequestParam(value = "size", defaultValue = "20") Integer size) {
-
-        try {
-            return Result.success(shopService.searchShops(cityId, keyword, start, size));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Result.failure();
-        }
-    }
-
     @GetMapping("/{shopId}/user/{userId}")
     @ApiOperation(value = "根据用户id和店铺id查询店铺详情")
     public Result getShopDetails(
@@ -96,6 +78,23 @@ public class ShopController {
 
         try {
             return Result.success(shopService.getShopDetails(shopId, userId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
+
+    @GetMapping("/city/{cityId}/lat/{userLat}/lng/{userLng}")
+    @ApiOperation(value = "根据城市id，用户所在经纬度查询周边")
+    public Result listDiscoverShops(
+            @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId,
+            @ApiParam(value = "用户所在纬度", name = "userLat") @PathVariable("userLat") Double userLat,
+            @ApiParam(value = "用户所在经度", name = "userLng") @PathVariable("userLng") Double userLng,
+            @ApiParam(value = "起始页 默认0", name = "start") @RequestParam(value = "start", defaultValue = "0") Integer start,
+            @ApiParam(value = "每页多少条 默认20", name = "size") @RequestParam(value = "size", defaultValue = "20") Integer size) {
+
+        try {
+            return Result.success(shopService.listDiscoverShops(cityId, userLng, userLat, start, size));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();

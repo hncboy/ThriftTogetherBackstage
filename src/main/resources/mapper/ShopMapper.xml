@@ -4,6 +4,18 @@
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.ShopMapper">
 
+    <resultMap id="discoverShopResultMap" type="DiscoverShopVO">
+        <result column="id" property="shopId"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="cover_url" property="shopCoverUrl"/>
+        <result column="average_score" property="averageScore"/>
+        <result column="average_price" property="averagePrice"/>
+        <result column="shop_area" property="shopArea"/>
+        <result column="shop_address" property="shopAddress"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+    </resultMap>
+
     <resultMap id="simpleShopResultMap" type="SimpleShopVO">
         <result column="id" property="shopId"/>
         <result column="city_id" property="cityId"/>
@@ -108,4 +120,21 @@
         select count(*) from recommended_daily where (day(now()) - day(update_date)) = 0
     </select>
 
+    <!-- 根据城市id查询所需要的发现页店铺信息 -->
+    <select id="listDiscoverShopsByCityId" parameterType="Integer" resultMap="discoverShopResultMap">
+       SELECT
+            id,
+            shop_name,
+            cover_url,
+            average_score,
+            average_price,
+            shop_area,
+            shop_address,
+            longitude,
+            latitude
+        FROM
+            shop
+        WHERE
+	        city_id = ${cityId}
+    </select>
 </mapper>

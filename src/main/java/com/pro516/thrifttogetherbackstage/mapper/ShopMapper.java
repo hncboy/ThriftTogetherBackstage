@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
+import com.pro516.thrifttogetherbackstage.entity.vo.DiscoverShopVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleProductVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
@@ -108,4 +109,12 @@ public interface ShopMapper {
      * 更新每日推荐
      */
     void insertRecommendedDaily(@Param("shopId") Integer shopId);
+
+    /**
+     * 根据城市id查询所需要的发现页店铺信息
+     *
+     * @param cityId
+     * @return
+     */
+    List<DiscoverShopVO> listDiscoverShopsByCityId(@Param("cityId") Integer cityId);
 }

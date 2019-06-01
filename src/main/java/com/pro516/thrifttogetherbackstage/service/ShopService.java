@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service;
 
+import com.pro516.thrifttogetherbackstage.entity.vo.DiscoverShopVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 import org.apache.ibatis.annotations.Param;
@@ -64,13 +65,12 @@ public interface ShopService {
     void updateRecommendedDaily();
 
     /**
-     * 根据城市id和关键字搜索店铺
+     * 根据城市id，用户所在经纬度查询周边
      *
      * @param cityId
-     * @param keyword
-     * @param start
-     * @param size
+     * @param userLng
+     * @param userLat
      * @return
      */
-    List<SimpleShopVO> searchShops(Integer cityId, String keyword, Integer start, Integer size);
+    List<DiscoverShopVO> listDiscoverShops(Integer cityId, Double userLng, Double userLat, Integer start, Integer size);
 }
