@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service;
 
+import com.pro516.thrifttogetherbackstage.entity.UserCoupon;
 import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleCouponVO;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,17 @@ public interface CouponService {
      * @return
      */
     CouponDetailsVO getCouponDetailsByCouponId(Integer couponId);
+
+    /**
+     * 根据用户id查询领取的优惠券
+     *
+     * @param userId
+     * @return
+     */
+    List<UserCoupon> listUserCouponsByUserId(Integer userId);
+
+    /**
+     * 更新优惠券状态
+     */
+    void updateCouponStatus();
 }

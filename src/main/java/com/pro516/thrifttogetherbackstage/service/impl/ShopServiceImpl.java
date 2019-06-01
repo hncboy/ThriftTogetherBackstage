@@ -58,4 +58,16 @@ public class ShopServiceImpl implements ShopService {
         userMapper.insertRecentlyBrowseShop(userId, shopId);
         return shopDetailsVO;
     }
+
+    @Transactional
+    @Override
+    public void updateRecommendedDaily() {
+        for (int i = 0; i < 6; i++) {
+            if (shopMapper.listRecommendedDaily() >= 6) {
+                break;
+            }
+            // TODO 推荐算法
+            shopMapper.insertRecommendedDaily(i + 1);
+        }
+    }
 }

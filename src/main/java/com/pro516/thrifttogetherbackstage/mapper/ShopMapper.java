@@ -89,4 +89,16 @@ public interface ShopMapper {
      * @return
      */
     Integer getShopIdByProductId(@Param("productId") Integer productId);
+
+    /**
+     * 查询每日推荐的数量
+     *
+     * @return
+     */
+    Integer listRecommendedDaily();
+
+    /**
+     * 更新每日推荐
+     */
+    void insertRecommendedDaily(@Param("shopId") Integer shopId);
 }

@@ -39,10 +39,23 @@ public class CouponController {
     @GetMapping("/{couponId}")
     @ApiOperation(value = "根据优惠卷id查询优惠券详情")
     public Result getCouponDetailsByCouponId(
-            @ApiParam(value = "优惠券id", name = "couponId") @PathVariable("couponId") Integer couponId
-    ) {
+            @ApiParam(value = "优惠券id", name = "couponId") @PathVariable("couponId") Integer couponId) {
+
         try {
             return Result.success(couponService.getCouponDetailsByCouponId(couponId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
+
+    @GetMapping("/user/{userId}")
+    @ApiOperation(value = "根据用户id查询领取的优惠券")
+    public Result listUserCouponsByUserId(
+            @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
+
+        try {
+            return Result.success(couponService.listUserCouponsByUserId(userId));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();

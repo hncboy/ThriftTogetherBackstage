@@ -2,6 +2,7 @@ package com.pro516.thrifttogetherbackstage.service;
 
 import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -56,4 +57,9 @@ public interface ShopService {
      * @return
      */
     ShopDetailsVO getShopDetails(Integer shopId, Integer userId);
+
+    /**
+     * 更新每日推荐
+     */
+    void updateRecommendedDaily();
 }
