@@ -24,6 +24,20 @@
             LIMIT 0, ${recordNum}
     </select>
 
+    <!-- 根据用户id和返回记录数查询搜索记录 -->
+    <select id="listHotSearchRecords" parameterType="Integer" resultType="String">
+        SELECT keyword
+        FROM
+            search_record
+        WHERE
+            city_id = ${cityId}
+        GROUP BY
+            keyword
+        ORDER BY
+            count( keyword ) DESC
+            LIMIT 0, ${recordNum}
+    </select>
+
     <!-- 插入用户搜索记录 -->
     <insert id="insertSearchRecord" parameterType="Map">
         INSERT INTO search_record ( keyword, user_id, city_id, search_time )

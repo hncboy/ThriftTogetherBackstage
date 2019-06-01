@@ -42,6 +42,11 @@ public class SearchServiceImpl implements SearchService {
         return searchMapper.listSearchRecordsByUserId(cityId, userId, recordNum);
     }
 
+    @Override
+    public List<String> listHotSearchRecords(Integer cityId, Integer recordNum) {
+        return searchMapper.listHotSearchRecords(cityId, recordNum);
+    }
+
     @Transactional
     @Override
     public List<SimpleShopVO> searchShops(Integer cityId, Integer userId, String keyword, Integer start, Integer size) {

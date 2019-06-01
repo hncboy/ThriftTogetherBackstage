@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service;
 
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,6 +22,14 @@ public interface SearchService {
      * @return
      */
     List<String> listUserSearchRecords(Integer cityId, Integer userId, Integer recordNum);
+
+    /**
+     * 根据城市id查找热门搜索记录
+     *
+     * @param cityId
+     * @return
+     */
+    List<String> listHotSearchRecords(Integer cityId, Integer recordNum);
 
     /**
      * 根据城市id和关键字搜索店铺

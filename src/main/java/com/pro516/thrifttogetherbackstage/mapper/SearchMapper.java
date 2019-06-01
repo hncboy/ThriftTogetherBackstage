@@ -29,6 +29,15 @@ public interface SearchMapper {
                                            @Param("recordNum") Integer recordNum);
 
     /**
+     * 根据城市id查找热门搜索记录
+     *
+     * @param cityId
+     * @return
+     */
+    List<String> listHotSearchRecords(@Param("cityId") Integer cityId,
+                                      @Param("recordNum") Integer recordNum);
+
+    /**
      * 插入用户搜索记录
      *
      * @param map

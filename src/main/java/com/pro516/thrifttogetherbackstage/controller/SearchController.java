@@ -52,4 +52,17 @@ public class SearchController {
             return Result.failure();
         }
     }
+
+    @GetMapping("/city/{cityId}")
+    @ApiOperation(value = "根据城市id查找热门搜索记录")
+    public Result searchShops(
+            @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId) {
+
+        try {
+            return Result.success(searchService.listHotSearchRecords(cityId, 10));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
 }
