@@ -93,4 +93,23 @@
             coupon_status = 2
             )
     </update>
+
+    <!-- 根据优惠券id获取优惠券状态 -->
+    <select id="getCouponStatusByCouponId" parameterType="Integer" resultType="Integer">
+       select coupon_status from coupon where id = ${couponId}
+    </select>
+
+    <!-- 根据用户id更新用户积分-->
+    <update id="updateUserIntegral" parameterType="Integer">
+        UPDATE USER
+            SET integral = ${integral}
+        WHERE
+            id = ${userId}
+    </update>
+
+    <!-- 根据用户id和优惠券id添加用户优惠券-->
+    <insert id="insertUserCoupon" parameterType="Integer">
+        INSERT INTO user_coupon ( user_id, coupon_id, receive_time, user_coupon_status )
+        VALUES ( ${userId}, ${couponId}, now(), 2)
+    </insert>
 </mapper>

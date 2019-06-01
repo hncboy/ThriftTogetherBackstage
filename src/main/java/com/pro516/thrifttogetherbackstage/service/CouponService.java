@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service;
 
+import com.pro516.thrifttogetherbackstage.entity.Result;
 import com.pro516.thrifttogetherbackstage.entity.UserCoupon;
 import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleCouponVO;
@@ -17,6 +18,7 @@ public interface CouponService {
 
     /**
      * 获取所有优惠券
+     *
      * @return
      */
     List<SimpleCouponVO> listSimpleCoupons();
@@ -41,4 +43,12 @@ public interface CouponService {
      * 更新优惠券状态
      */
     void updateCouponStatus();
+
+    /**
+     * 根据用户id和优惠券id兑换优惠券
+     *
+     * @param userId
+     * @param couponId
+     */
+    Result userExchangeCoupon(Integer couponId, Integer userId);
 }

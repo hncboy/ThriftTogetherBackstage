@@ -42,7 +42,7 @@ public interface CouponMapper {
      * @return
      */
     List<UserCoupon> listUserCoupons(@Param("userId") Integer userId,
-                                             @Param("userCouponStatus") Integer userCouponStatus);
+                                     @Param("userCouponStatus") Integer userCouponStatus);
 
     /**
      * 更新优惠券状态
@@ -55,4 +55,30 @@ public interface CouponMapper {
      * @param userId
      */
     void updateUserCouponStatus(Integer userId);
+
+    /**
+     * 根据优惠券id获取优惠券状态
+     *
+     * @param couponId
+     * @return
+     */
+    Integer getCouponStatusByCouponId(@Param("couponId") Integer couponId);
+
+    /**
+     * 根据用户id更新用户积分
+     *
+     * @param userId
+     * @param integral
+     */
+    void updateUserIntegral(@Param("userId") Integer userId,
+                            @Param("integral") Integer integral);
+
+    /**
+     * 根据用户id和优惠券id添加用户优惠券
+     *
+     * @param userId
+     * @param couponId
+     */
+    void insertUserCoupon(@Param("userId") Integer userId,
+                          @Param("couponId") Integer couponId);
 }
