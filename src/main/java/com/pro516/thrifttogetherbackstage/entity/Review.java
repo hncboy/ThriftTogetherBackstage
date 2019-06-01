@@ -1,12 +1,10 @@
 package com.pro516.thrifttogetherbackstage.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,9 +18,6 @@ import java.util.List;
 @ApiModel(value = "Review 评价")
 public class Review {
 
-    @ApiModelProperty(value = "评价id")
-    private Integer reviewId;
-
     @ApiModelProperty(value = "用户id")
     private Integer userId;
 
@@ -31,6 +26,9 @@ public class Review {
 
     @ApiModelProperty(value = "评论图片")
     private List<String> reviewPicUrlList;
+
+    @ApiModelProperty(value = "评价店铺id")
+    private Integer shopId;
 
     @ApiModelProperty(value = "评价商品id")
     private Integer productId;

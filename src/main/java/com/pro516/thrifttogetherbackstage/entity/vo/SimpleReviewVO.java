@@ -36,7 +36,7 @@ public class SimpleReviewVO {
     private List<String> reviewPicUrlList;
 
     @ApiModelProperty(value = "评价分数")
-    private Double reviewScore;
+    private Integer reviewScore;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "评价时间")

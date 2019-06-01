@@ -4,6 +4,7 @@ import com.pro516.thrifttogetherbackstage.entity.Review;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleReviewVO;
 import com.pro516.thrifttogetherbackstage.mapper.OrderMapper;
 import com.pro516.thrifttogetherbackstage.mapper.ReviewMapper;
+import com.pro516.thrifttogetherbackstage.mapper.ShopMapper;
 import com.pro516.thrifttogetherbackstage.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,16 +27,20 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private OrderMapper orderMapper;
 
+    @Autowired
+    private ShopMapper shopMapper;
+
     @Transactional
     @Override
     public void reviewOrder(Review review) {
         orderMapper.updateOrderStatus(orderMapper.getOrderByOrderNo(review.getOrderId()));
+        review.setShopId(shopMapper.getShopIdByProductId(review.getProductId()));
         reviewMapper.reviewOrder(review);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<SimpleReviewVO> listReviewsByProductId(Integer productId) {
-        return reviewMapper.listReviewsByProductId(productId);
+    public List<SimpleReviewVO> listReviewsByShopId(Integer shopId) {
+        return reviewMapper.listReviewsByShopId(shopId);
     }
 }

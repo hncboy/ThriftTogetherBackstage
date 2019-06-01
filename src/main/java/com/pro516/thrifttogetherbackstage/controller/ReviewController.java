@@ -35,13 +35,13 @@ public class ReviewController {
         }
     }
 
-    @GetMapping("/product/{productId}")
-    @ApiOperation(value = "根据商品id获取评价信息")
+    @GetMapping("/shop/{shopId}")
+    @ApiOperation(value = "根据店铺id获取评价信息")
     public Result listReviewsByProductId(
-            @ApiParam(value = "商品id", name = "productId") @PathVariable("productId") Integer productId) {
+            @ApiParam(value = "店铺id", name = "shopId") @PathVariable("shopId") Integer shopId) {
         // FIXME 目前只能获取带图片评价，不然报错
         try {
-            return Result.success(reviewService.listReviewsByProductId(productId));
+            return Result.success(reviewService.listReviewsByShopId(shopId));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();

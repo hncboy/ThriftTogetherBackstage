@@ -100,6 +100,7 @@ public class UserController {
     public Result userFeedback(
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
             @ApiParam(value = "反馈内容", name = "content") @PathVariable("content") String content) {
+
         try {
             userService.userFeedback(userId, content);
             return Result.success();

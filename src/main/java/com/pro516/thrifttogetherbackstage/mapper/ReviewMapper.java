@@ -27,8 +27,8 @@ public interface ReviewMapper {
     /**
      * 根据商品id获取评价信息
      *
-     * @param productId
+     * @param shopId
      * @return
      */
-    List<SimpleReviewVO> listReviewsByProductId(@Param("productId") Integer productId);
+    List<SimpleReviewVO> listReviewsByShopId(@Param("shopId") Integer shopId);
 }

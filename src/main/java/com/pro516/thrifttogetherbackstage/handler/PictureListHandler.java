@@ -27,7 +27,6 @@ public class PictureListHandler extends BaseTypeHandler<List<String>> {
     @Override
     public List<String> getNullableResult(ResultSet resultSet, String s) throws SQLException {
         String json = resultSet.getString(s);
-        System.out.println(json);
         List<String> pictureList = JsonUtil.convertString2Object(json, new TypeReference<List<String>>() {
         });
 

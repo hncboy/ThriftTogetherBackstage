@@ -16,17 +16,18 @@
 
     <!--评价订单-->
     <insert id="reviewOrder" parameterType="review">
-        INSERT INTO review ( user_id, review_content, review_pic_url, product_id, order_id, review_score, review_time )
+        INSERT INTO review ( user_id, review_content, review_pic_url, shop_id, product_id, order_id, review_score, review_time )
         VALUES(${review.userId},
             #{review.reviewContent},
             #{review.reviewPicUrlList, typeHandler=com.pro516.thrifttogetherbackstage.handler.PictureListHandler},
+            ${review.shopId},
             ${review.productId},
             #{review.orderId},
             ${review.reviewScore},
             now())
     </insert>
 
-    <select id="listReviewsByProductId" parameterType="Integer" resultMap="simpleReviewResultMap">
+    <select id="listReviewsByShopId" parameterType="Integer" resultMap="simpleReviewResultMap">
         SELECT
             review_id,
             ( SELECT username FROM USER WHERE id = user_id ) AS username,
@@ -38,7 +39,7 @@
         FROM
             review
         WHERE
-            product_id = ${productId}
+            shop_id = ${shopId}
         ORDER BY
             review_time DESC
     </select>

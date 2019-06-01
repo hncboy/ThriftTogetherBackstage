@@ -26,5 +26,5 @@ public interface ReviewService {
      * @param productId
      * @return
      */
-    List<SimpleReviewVO> listReviewsByProductId(@Param("productId") Integer productId);
+    List<SimpleReviewVO> listReviewsByShopId(@Param("productId") Integer productId);
 }

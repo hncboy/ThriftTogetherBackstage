@@ -81,4 +81,12 @@ public interface ShopMapper {
      * @return
      */
     List<SimpleProductVO> listSimpleProductsByShopId(@Param("shopId") Integer shopId);
+
+    /**
+     * 根据商品id查询所属的店铺id
+     *
+     * @param productId
+     * @return
+     */
+    Integer getShopIdByProductId(@Param("productId") Integer productId);
 }
