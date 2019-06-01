@@ -1,7 +1,9 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
-import com.pro516.thrifttogetherbackstage.entity.Coupon;
+import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleCouponVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,5 +23,13 @@ public interface CouponMapper {
      *
      * @return
      */
-    List<Coupon> listCoupons();
+    List<SimpleCouponVO> listSimpleCoupons();
+
+    /**
+     * 根据优惠卷id查询优惠券详情
+     *
+     * @param couponId
+     * @return
+     */
+    CouponDetailsVO getCouponDetailsByCouponId(@Param("couponId") Integer couponId);
 }

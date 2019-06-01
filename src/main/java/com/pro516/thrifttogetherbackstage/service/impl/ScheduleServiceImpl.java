@@ -29,4 +29,10 @@ public class ScheduleServiceImpl implements ScheduleService {
             scheduleMapper.insertRecommendedDaily(i + 1);
         }
     }
+
+    @Transactional
+    @Override
+    public void updateCouponStatus() {
+        scheduleMapper.updateCouponStatus();
+    }
 }

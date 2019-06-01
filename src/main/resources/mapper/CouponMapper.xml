@@ -3,21 +3,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.CouponMapper">
-    <resultMap id="couponResultMap" type="Coupon">
+
+    <resultMap id="simpleCouponResultMap" type="SimpleCouponVO">
+        <result column="id" property="couponId"/>
         <result column="coupon_name" property="couponName"/>
         <result column="coupon_integral" property="couponIntegral"/>
         <result column="coupon_image_url" property="couponImageUrl"/>
-        <result column="discounted_prices" property="discountedPrices"/>
-        <result column="exchange_number" property="exchangeNumber"/>
-        <result column="coupon_total" property="couponTotal"/>
-        <result column="coupon_status" property="couponStatus"/>
-        <result column="create_time" property="createTime"/>
-        <result column="sell_out_time" property="sellOutTime"/>
-        <result column="removed_time" property="removedTime"/>
+    </resultMap>
+
+    <resultMap id="couponDetailsResultMap" type="CouponDetailsVO">
+        <result column="id" property="couponId"/>
+        <result column="coupon_integral" property="couponIntegral"/>
+        <result column="coupon_details_image_url" property="couponDetailsImageUrl"/>
+        <result column="discounted_price" property="couponDiscountedPrice"/>
+        <result column="expired_date" property="expiredDate"/>
     </resultMap>
 
     <!-- 获取所有优惠券 -->
-    <select id="listCoupons" resultMap="couponResultMap">
-        select * from coupon where coupon_status = 1
+    <select id="listSimpleCoupons" resultMap="simpleCouponResultMap">
+        SELECT
+            id,
+            coupon_name,
+            coupon_integral,
+            coupon_image_url
+        FROM
+            coupon
+        WHERE
+            coupon_status = 1
     </select>
+
+    <!-- 根据优惠卷id查询优惠券详情 -->
+    <select id="getCouponDetailsByCouponId" parameterType="Integer" resultMap="couponDetailsResultMap">
+        SELECT
+            id,
+            coupon_name,
+            coupon_integral,
+            coupon_details_image_url,
+            discounted_price,
+            expired_date
+        FROM
+            coupon
+        WHERE
+            coupon_status = 1
+            AND id = ${couponId}
+    </select>
+
 </mapper>

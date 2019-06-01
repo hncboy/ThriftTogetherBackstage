@@ -20,14 +20,10 @@ import java.util.Date;
 public class User {
 
     @ApiModelProperty(value = "用户id")
-    private Integer id;
+    private Integer userId;
 
     @ApiModelProperty(value = "用户名")
     private String username;
-
-    @JsonIgnore
-    @ApiModelProperty(value = "密码")
-    private String password;
 
     @ApiModelProperty(value = "头像url")
     private String avatorUrl;

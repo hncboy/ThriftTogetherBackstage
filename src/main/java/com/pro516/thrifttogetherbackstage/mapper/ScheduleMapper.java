@@ -24,4 +24,9 @@ public interface ScheduleMapper {
      * 更新每日推荐
      */
     void insertRecommendedDaily(@Param("shopId") Integer shopId);
+
+    /**
+     * 更新优惠券状态
+     */
+    void updateCouponStatus();
 }

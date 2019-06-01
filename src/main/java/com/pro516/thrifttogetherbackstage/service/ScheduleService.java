@@ -12,4 +12,9 @@ public interface ScheduleService {
      * 更新每日推荐
      */
     void updateRecommendedDaily();
+
+    /**
+     * 更新优惠券状态
+     */
+    void updateCouponStatus();
 }

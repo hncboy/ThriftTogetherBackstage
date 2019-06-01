@@ -17,7 +17,16 @@
 
     <!-- 根据用户id查找用户信息 -->
     <select id="findUserByUserId" parameterType="Integer" resultMap="userResultMap">
-        select * from user where id = #{userId}
+        SELECT
+            id,
+            username,
+            avator_url,
+            phone,
+            integral
+        FROM
+        USER
+        WHERE
+            id = #{userId}
     </select>
 
     <!-- 更新用户头像 -->

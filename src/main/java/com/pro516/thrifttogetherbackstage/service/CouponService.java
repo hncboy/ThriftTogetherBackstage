@@ -1,9 +1,10 @@
 package com.pro516.thrifttogetherbackstage.service;
 
-import com.pro516.thrifttogetherbackstage.entity.Coupon;
+import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleCouponVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,5 +18,13 @@ public interface CouponService {
      * 获取所有优惠券
      * @return
      */
-    List<Coupon> listCoupons();
+    List<SimpleCouponVO> listSimpleCoupons();
+
+    /**
+     * 根据优惠卷id查询优惠券详情
+     *
+     * @param couponId
+     * @return
+     */
+    CouponDetailsVO getCouponDetailsByCouponId(Integer couponId);
 }
