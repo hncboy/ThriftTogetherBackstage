@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service;
 
 import com.pro516.thrifttogetherbackstage.entity.vo.DiscoverShopVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.ProductDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
 import org.apache.ibatis.annotations.Param;
@@ -73,4 +74,12 @@ public interface ShopService {
      * @return
      */
     List<DiscoverShopVO> listDiscoverShops(Integer cityId, Double userLng, Double userLat, Integer start, Integer size);
+
+    /**
+     * 根据店铺id查询店铺商品详情列表
+     *
+     * @param shopId
+     * @return
+     */
+    List<ProductDetailsVO> listDetailProductsByShopId(Integer shopId);
 }

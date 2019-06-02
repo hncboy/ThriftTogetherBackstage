@@ -35,6 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
     public void reviewOrder(Review review) {
         orderMapper.updateOrderStatus(orderMapper.getOrderByOrderNo(review.getOrderId()));
         review.setShopId(shopMapper.getShopIdByProductId(review.getProductId()));
+        // TODO 评价获得积分
         reviewMapper.reviewOrder(review);
     }
 

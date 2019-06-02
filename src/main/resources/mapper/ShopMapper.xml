@@ -4,6 +4,19 @@
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.ShopMapper">
 
+    <resultMap id="productDetailsResultMap" type="ProductDetailsVO">
+        <result column="product_id" property="productId"/>
+        <result column="product_name" property="productName"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="product_tags" property="productTags" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
+        <result column="product_content" property="productContent" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
+        <result column="product_reminder" property="productReminder" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="product_original_price" property="productOriginalPrice"/>
+        <result column="product_discount" property="productDiscount"/>
+        <result column="product_sales" property="productSales"/>
+    </resultMap>
+
     <resultMap id="discoverShopResultMap" type="DiscoverShopVO">
         <result column="id" property="shopId"/>
         <result column="shop_name" property="shopName"/>
@@ -32,6 +45,9 @@
         <result column="product_name" property="productName"/>
         <result column="product_use_time" property="productUseTime"/>
         <result column="product_price" property="productPrice"/>
+        <result column="product_original_price" property="productOriginalPrice"/>
+        <result column="product_discount" property="productDiscount"/>
+        <result column="product_sales" property="productSales"/>
     </resultMap>
 
     <resultMap id="shopDetailsResultMap" type="ShopDetailsVO">
@@ -101,7 +117,10 @@
             cover_url AS product_cover_url,
             product_name,
             use_time AS product_use_time,
-            product_price
+            product_price,
+		    product_original_price,
+		    product_discount,
+		    product_sales
         FROM
             product
         WHERE
@@ -109,6 +128,13 @@
         ORDER BY
             publish_time DESC
     </select>
+
+    <!-- 根据商品id更新商品团购价格 -->
+    <update id="updateProductDiscountPrice" parameterType="Integer">
+        UPDATE product
+        SET product_price = product_original_price * product_discount / 10
+        WHERE id = ${productId}
+    </update>
 
     <!-- 根据店铺id查询简单店铺信息 -->
     <select id="getShopIdByProductId" parameterType="Integer" resultType="Integer">
@@ -143,4 +169,26 @@
         WHERE
 	        city_id = ${cityId}
     </select>
+
+    <!-- 根据店铺id查询店铺商品详情列表 -->
+    <select id="listDetailProductsByShopId" parameterType="Integer" resultMap="productDetailsResultMap">
+        SELECT
+            id AS product_id,
+            product_name,
+            ( SELECT shop_name FROM shop WHERE id = 1 ) AS shop_name,
+            product_tags,
+            product_content,
+            product_reminder,
+            product_price,
+            product_original_price,
+            product_discount,
+            product_sales
+        FROM
+            product
+        WHERE
+            shop_id = ${shopId}
+        ORDER BY
+            publish_time DESC
+    </select>
+
 </mapper>

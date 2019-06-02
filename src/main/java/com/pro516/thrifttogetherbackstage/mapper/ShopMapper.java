@@ -1,9 +1,6 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
-import com.pro516.thrifttogetherbackstage.entity.vo.DiscoverShopVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.SimpleProductVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -91,6 +88,13 @@ public interface ShopMapper {
     List<SimpleProductVO> listSimpleProductsByShopId(@Param("shopId") Integer shopId);
 
     /**
+     * 根据商品id更新商品团购价格
+     *
+     * @param productId
+     */
+    void updateProductDiscountPrice(@Param("productId") Integer productId);
+
+    /**
      * 根据商品id查询所属的店铺id
      *
      * @param productId
@@ -117,4 +121,12 @@ public interface ShopMapper {
      * @return
      */
     List<DiscoverShopVO> listDiscoverShopsByCityId(@Param("cityId") Integer cityId);
+
+    /**
+     * 根据店铺id查询店铺商品详情列表
+     *
+     * @param shopId
+     * @return
+     */
+    List<ProductDetailsVO> listDetailProductsByShopId(@Param("shopId") Integer shopId);
 }

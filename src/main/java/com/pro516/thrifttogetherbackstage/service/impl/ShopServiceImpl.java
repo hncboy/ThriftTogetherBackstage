@@ -1,25 +1,18 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
-import com.pro516.thrifttogetherbackstage.elasticsearch.ShopRepository;
-import com.pro516.thrifttogetherbackstage.entity.vo.DiscoverShopVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.ShopDetailsVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.SimpleShopVO;
-import com.pro516.thrifttogetherbackstage.mapper.SearchMapper;
+import com.pro516.thrifttogetherbackstage.entity.vo.*;
 import com.pro516.thrifttogetherbackstage.mapper.ShopMapper;
 import com.pro516.thrifttogetherbackstage.mapper.UserMapper;
 import com.pro516.thrifttogetherbackstage.service.ShopService;
 import com.pro516.thrifttogetherbackstage.util.DistanceUtil;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -64,6 +57,12 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public ShopDetailsVO getShopDetails(Integer shopId, Integer userId) {
         ShopDetailsVO shopDetailsVO = shopMapper.getShopDetails(shopId, userId);
+        // FIXME 下策 更新打折后的价格
+        List<SimpleProductVO> simpleProductVOS = shopMapper.listSimpleProductsByShopId(shopId);
+        for (SimpleProductVO simpleProductVO : simpleProductVOS) {
+            shopMapper.updateProductDiscountPrice(simpleProductVO.getProductId());
+        }
+
         shopDetailsVO.setSimpleProductList(shopMapper.listSimpleProductsByShopId(shopId));
         userMapper.insertRecentlyBrowseShop(userId, shopId);
         return shopDetailsVO;
@@ -100,5 +99,11 @@ public class ShopServiceImpl implements ShopService {
         });
         // TODO 分页
         return discoverShopVOS;
+    }
+
+    @Transactional
+    @Override
+    public List<ProductDetailsVO> listDetailProductsByShopId(Integer shopId) {
+        return shopMapper.listDetailProductsByShopId(shopId);
     }
 }

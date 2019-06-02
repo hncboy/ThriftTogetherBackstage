@@ -26,7 +26,7 @@ public class CollectedProductVO {
     private String coverUrl;
 
     @ApiModelProperty(value = "商品价格")
-    private Integer productPrice;
+    private Double productPrice;
 
     @ApiModelProperty(value = "店铺名称")
     private String shopName;

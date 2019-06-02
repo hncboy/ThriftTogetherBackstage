@@ -5,6 +5,7 @@
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.UserMapper">
 
     <resultMap id="userResultMap" type="User">
+        <result column="id" property="userId"/>
         <result column="avator_url" property="avatorUrl"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>

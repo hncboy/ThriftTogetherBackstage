@@ -95,4 +95,17 @@ public class ShopController {
             return Result.failure();
         }
     }
+
+    @GetMapping("/{shopId}/product")
+    @ApiOperation(value = "根据店铺id查询店铺商品详情列表")
+    public Result listDetailProductsByShopId(
+            @ApiParam(value = "店铺id", name = "shopId") @PathVariable("shopId") Integer shopId) {
+
+        try {
+            return Result.success(shopService.listDetailProductsByShopId(shopId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
 }

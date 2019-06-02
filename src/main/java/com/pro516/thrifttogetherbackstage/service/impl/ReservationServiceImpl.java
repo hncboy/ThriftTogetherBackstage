@@ -6,6 +6,7 @@ import com.pro516.thrifttogetherbackstage.mapper.ReservationMapper;
 import com.pro516.thrifttogetherbackstage.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +23,19 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     private ReservationMapper reservationMapper;
 
+    @Transactional
     @Override
     public void insertReservation(Reservation reservation) {
         reservationMapper.insertReservation(reservation);
     }
 
+    @Transactional
     @Override
     public void cancelReservation(Integer reservationId) {
         reservationMapper.cancelReservation(reservationId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<SimpleReservationVO> listSimpleReservationsByUserId(Integer userId) {
         List<SimpleReservationVO> simpleReservationVOS = new ArrayList<>();
