@@ -120,6 +120,12 @@
         select count(*) from recommended_daily where (day(now()) - day(update_date)) = 0
     </select>
 
+    <!-- 插入今日推荐商品 -->
+    <insert id="insertRecommendedDaily" parameterType="Integer" >
+        insert into recommended_daily (shop_id,  update_date)
+        VALUES(${shopId}, now());
+    </insert>
+
     <!-- 根据城市id查询所需要的发现页店铺信息 -->
     <select id="listDiscoverShopsByCityId" parameterType="Integer" resultMap="discoverShopResultMap">
        SELECT

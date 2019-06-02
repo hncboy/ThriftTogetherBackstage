@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pro516.thrifttogetherbackstage.mapper.ReservationMapper">
+
+    <resultMap id="simpleReservationResultMap" type="SimpleReservationVO">
+        <result column="id" property="reservationId"/>
+        <result column="shop_cover_url" property="shopCoverUrl"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="shop_area" property="shopArea"/>
+        <result column="reserve_time" property="reserveTime"/>
+        <result column="reservation_people_num" property="reservationPeopleNum"/>
+    </resultMap>
+
+    <!-- 添加预约 -->
+    <insert id="insertReservation" parameterType="reservation">
+        INSERT INTO reservation ( user_id, shop_id, create_time, reserve_time,
+        reservation_people_num, reservation_people_name, reservation_people_phone,
+        reservation_remarks, reservation_status )
+        VALUES (${reservation.userId},
+                ${reservation.shopId},
+                now(),
+                #{reservation.reserveTime, jdbcType=TIMESTAMP},
+                ${reservation.reservationPeopleNum},
+                #{reservation.reservationPeopleName},
+                #{reservation.reservationPeoplePhone},
+                #{reservation.reservationRemarks},
+                0)
+    </insert>
+
+    <!-- 取消预约 -->
+    <update id="cancelReservation" parameterType="Integer">
+        UPDATE reservation SET reservation_status = 1 WHERE id = ${reservationId}
+    </update>
+
+
+    <!-- 根据用户id和预定状态查询预约信息 -->
+    <select id="listSimpleReservations" parameterType="Integer" resultMap="simpleReservationResultMap">
+        SELECT
+            id,
+            ( SELECT cover_url FROM shop WHERE id = shop_id ) AS shop_cover_url,
+            ( SELECT shop_name FROM shop WHERE id = shop_id ) AS shop_name,
+            ( SELECT shop_area FROM shop WHERE id = shop_id ) AS shop_area,
+            reserve_time,
+            reservation_people_num
+        FROM
+            reservation
+        WHERE
+            user_id = ${userId}
+            AND reservation_status = ${reservationStatus}
+        ORDER BY
+            reserve_time DESC
+    </select>
+</mapper>

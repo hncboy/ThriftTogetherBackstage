@@ -11,7 +11,7 @@ import lombok.Getter;
 public enum ResultCode {
 
     SUCCESS(200, "成功"),
-    FAILURE(404, "失败"),
+    FAILURE(500, "失败"),
 
     USER_LOGIN_ERROR(10001, "手机号或密码错误");
 
