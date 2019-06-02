@@ -16,13 +16,13 @@
 
     <!--评价订单-->
     <insert id="reviewOrder" parameterType="review">
-        INSERT INTO review ( user_id, review_content, review_pic_url, shop_id, product_id, order_id, review_score, review_time )
+        INSERT INTO review ( user_id, review_content, review_pic_url, shop_id, product_id, order_no, review_score, review_time )
         VALUES(${review.userId},
             #{review.reviewContent},
             #{review.reviewPicUrlList, typeHandler=com.pro516.thrifttogetherbackstage.handler.PictureListHandler},
             ${review.shopId},
             ${review.productId},
-            #{review.orderId},
+            #{review.orderNo},
             ${review.reviewScore},
             now())
     </insert>

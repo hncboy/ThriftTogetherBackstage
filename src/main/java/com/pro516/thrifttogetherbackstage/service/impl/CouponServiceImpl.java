@@ -67,13 +67,13 @@ public class CouponServiceImpl implements CouponService {
         // 1.判断优惠券有没有过期
         Integer couponStatus = couponMapper.getCouponStatusByCouponId(couponId);
         if (couponStatus == 2) {
-            return new Result(404, "优惠券已过期", null);
+            return new Result(500, "优惠券已过期", null);
         }
         // 2.判断用户积分是否足够
         CouponDetailsVO couponDetailsVO = couponMapper.getCouponDetailsByCouponId(couponId);
         Integer userIntegral = userMapper.findUserByUserId(userId).getIntegral();
         if (userIntegral < couponDetailsVO.getCouponIntegral()) {
-            return new Result(404, "用户积分不足", null);
+            return new Result(500, "用户积分不足", null);
         }
         try {
             // 3.扣除积分

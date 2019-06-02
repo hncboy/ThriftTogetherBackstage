@@ -81,4 +81,13 @@ public interface CouponMapper {
      */
     void insertUserCoupon(@Param("userId") Integer userId,
                           @Param("couponId") Integer couponId);
+
+    /**
+     * 用户使用优惠券
+     *
+     * @param orderNo
+     * @param userCouponId
+     */
+    void userUseCoupon(@Param("orderNo") Long orderNo,
+                       @Param("userCouponId") Integer userCouponId);
 }

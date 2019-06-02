@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -27,14 +28,16 @@ public class Review {
     @ApiModelProperty(value = "评论图片")
     private List<String> reviewPicUrlList;
 
+    @JsonIgnore
     @ApiModelProperty(value = "评价店铺id")
     private Integer shopId;
 
+    @JsonIgnore
     @ApiModelProperty(value = "评价商品id")
     private Integer productId;
 
-    @ApiModelProperty(value = "评价订单id")
-    private String orderId;
+    @ApiModelProperty(value = "评价订单号")
+    private Long orderNo;
 
     @ApiModelProperty(value = "评价分数")
     private Integer reviewScore;

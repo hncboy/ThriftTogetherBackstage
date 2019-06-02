@@ -1,9 +1,13 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
 import com.pro516.thrifttogetherbackstage.entity.Order;
+import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
+import com.pro516.thrifttogetherbackstage.mapper.CouponMapper;
 import com.pro516.thrifttogetherbackstage.mapper.OrderMapper;
 import com.pro516.thrifttogetherbackstage.service.OrderService;
+import com.pro516.thrifttogetherbackstage.util.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +27,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
+
+    @Autowired
+    private CouponMapper couponMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -46,13 +53,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public void deleteOrder(String orderNo) {
+    public void deleteOrder(Long orderNo) {
         orderMapper.deleteOrder(orderNo);
     }
 
     @Transactional
     @Override
-    public void updateOrderStatus(String orderNo, Integer orderStatus) {
+    public void updateOrderStatus(Long orderNo, Integer orderStatus) {
         Order order = orderMapper.getOrderByOrderNo(orderNo);
         // 修改订单状态只能从状态为2的时候开始
         switch (orderStatus) {
@@ -76,5 +83,22 @@ public class OrderServiceImpl implements OrderService {
                 break;
         }
         orderMapper.updateOrderStatus(order);
+    }
+
+    @Transactional
+    @Override
+    public Long createOrder(CreatedOrderVO createdOrderVO) {
+        SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0, 0);
+        Long orderNo = snowflakeIdWorker.nextId();
+        createdOrderVO.setOrderNo(orderNo);
+        orderMapper.insertOrder(createdOrderVO);
+
+        // 判断是否使用优惠券
+        if (createdOrderVO.getIsUseCoupon() == 1 && createdOrderVO.getUserCouponId() != null) {
+            couponMapper.userUseCoupon(createdOrderVO.getOrderNo(), createdOrderVO.getUserCouponId());
+        } else {
+            createdOrderVO.setUserCouponId(0);
+        }
+        return orderNo;
     }
 }

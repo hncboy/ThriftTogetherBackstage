@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.controller;
 
 import com.pro516.thrifttogetherbackstage.entity.Result;
+import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
 import com.pro516.thrifttogetherbackstage.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +30,7 @@ public class OrderController {
             @ApiParam(value = "订单状态", name = "orderStatus") @PathVariable("orderStatus") Integer orderStatus) {
 
         try {
-            return Result.success( orderService.listOrdersByStatus(userId, orderStatus));
+            return Result.success(orderService.listOrdersByStatus(userId, orderStatus));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();
@@ -52,7 +53,7 @@ public class OrderController {
     @DeleteMapping("/{orderNo}")
     @ApiOperation(value = "删除已完成订单")
     public Result deleteOrder(
-            @ApiParam(value = "订单号", name = "orderNo") @PathVariable("orderNo") String orderNo) {
+            @ApiParam(value = "订单号", name = "orderNo") @PathVariable("orderNo") Long orderNo) {
 
         try {
             orderService.deleteOrder(orderNo);
@@ -66,12 +67,23 @@ public class OrderController {
     @GetMapping("/{orderNo}/status/{orderStatus}")
     @ApiOperation(value = "修改订单状态")
     public Result deleteOrder(
-            @ApiParam(value = "订单号", name = "orderNo") @PathVariable("orderNo") String orderNo,
+            @ApiParam(value = "订单号", name = "orderNo") @PathVariable("orderNo") Long orderNo,
             @ApiParam(value = "订单状态", name = "orderStatus") @PathVariable("orderStatus") Integer orderStatus) {
 
         try {
             orderService.updateOrderStatus(orderNo, orderStatus);
             return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
+
+    @PostMapping
+    @ApiOperation(value = "用户创建订单")
+    public Result createOrder(@RequestBody CreatedOrderVO createdOrderVO) {
+        try {
+            return Result.success(orderService.createOrder(createdOrderVO));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();

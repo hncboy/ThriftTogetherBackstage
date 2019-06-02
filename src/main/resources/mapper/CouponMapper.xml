@@ -77,7 +77,9 @@
 
     <!-- 更新优惠券状态 -->
     <update id="updateCouponStatus">
-        update coupon set coupon_status = 2 where (day(now()) - day(expired_date)) = 0
+        UPDATE coupon
+        SET coupon_status = 2
+        WHERE ( DAY (now()) - DAY ( expired_date )) = 0 AND coupon_status =1
     </update>
 
     <!-- 更新优惠券状态 -->
@@ -86,14 +88,7 @@
         SET user_coupon_status = 3
         WHERE
             user_id = 1
-            AND coupon_id IN (
-            SELECT
-                id
-            FROM
-                coupon
-            WHERE
-            coupon_status = 2
-            )
+            AND coupon_id IN ( SELECT id FROM coupon WHERE coupon_status = 2 )
     </update>
 
     <!-- 根据优惠券id获取优惠券状态 -->
@@ -103,10 +98,7 @@
 
     <!-- 根据用户id更新用户积分-->
     <update id="updateUserIntegral" parameterType="Integer">
-        UPDATE USER
-            SET integral = ${integral}
-        WHERE
-            id = ${userId}
+        UPDATE USER SET integral = ${integral} WHERE id = ${userId}
     </update>
 
     <!-- 根据用户id和优惠券id添加用户优惠券-->
@@ -114,4 +106,16 @@
         INSERT INTO user_coupon ( user_id, coupon_id, receive_time, user_coupon_status )
         VALUES ( ${userId}, ${couponId}, now(), 2)
     </insert>
+
+    <!-- 用户使用优惠券-->
+    <update id="userUseCoupon">
+        UPDATE user_coupon
+        SET use_time = now(),
+        use_order_no = ${orderNo},
+        user_coupon_status = 1
+        WHERE
+            id = ${userCouponId}
+            AND user_coupon_status = 2
+    </update>
+
 </mapper>

@@ -19,7 +19,7 @@ import java.util.Date;
 public class Order {
 
     @ApiModelProperty(value = "订单号")
-    private String orderNo;
+    private Long orderNo;
 
     @ApiModelProperty(value = "用户id")
     private Integer userId;

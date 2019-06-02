@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service;
 
+import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,7 +35,7 @@ public interface OrderService {
      *
      * @param orderNo
      */
-    void deleteOrder(String orderNo);
+    void deleteOrder(Long orderNo);
 
     /**
      * 修改订单状态
@@ -42,5 +43,13 @@ public interface OrderService {
      * @param orderNo
      * @param orderStatus
      */
-    void updateOrderStatus(String orderNo, Integer orderStatus);
+    void updateOrderStatus(Long orderNo, Integer orderStatus);
+
+    /**
+     * 创建订单
+     *
+     * @param createdOrderVO
+     * @return 返回订单号
+     */
+    Long createOrder(CreatedOrderVO createdOrderVO);
 }

@@ -20,7 +20,7 @@ import java.util.Date;
 public class SimpleOrderVO {
 
     @ApiModelProperty(value = "订单号")
-    private String orderNo;
+    private Long orderNo;
 
     @ApiModelProperty(value = "店铺类型")
     private Integer shopCategoryId;
