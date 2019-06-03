@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
+import com.pro516.thrifttogetherbackstage.entity.AfterSaleOrder;
 import com.pro516.thrifttogetherbackstage.entity.Order;
 import com.pro516.thrifttogetherbackstage.entity.Product;
 import com.pro516.thrifttogetherbackstage.entity.UserCoupon;
@@ -135,5 +136,17 @@ public class OrderServiceImpl implements OrderService {
         orderDetailsVO.setShopName(simpleShopVO.getShopName());
 
         return orderDetailsVO;
+    }
+
+    @Transactional
+    @Override
+    public void refundAfterSaleOrder(AfterSaleOrder afterSaleOrder) {
+        // 修改订单状态
+        Order order = orderMapper.getOrderByOrderNo(afterSaleOrder.getOrderNo());
+        order.setOrderStatus(5);
+        order.setAfterSaleTime(new Date());
+        orderMapper.updateOrderStatus(order);
+        // 插入售后订单
+        orderMapper.insertAfterSaleOrder(afterSaleOrder);
     }
 }

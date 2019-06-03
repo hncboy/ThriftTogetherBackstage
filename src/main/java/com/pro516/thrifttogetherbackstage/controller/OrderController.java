@@ -1,6 +1,8 @@
 package com.pro516.thrifttogetherbackstage.controller;
 
+import com.pro516.thrifttogetherbackstage.entity.AfterSaleOrder;
 import com.pro516.thrifttogetherbackstage.entity.Result;
+import com.pro516.thrifttogetherbackstage.entity.Review;
 import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
 import com.pro516.thrifttogetherbackstage.service.OrderService;
 import io.swagger.annotations.Api;
@@ -99,6 +101,18 @@ public class OrderController {
 
         try {
             return Result.success(orderService.getDetailOrderByOrderNo(orderNo));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
+
+    @PostMapping("/refund")
+    @ApiOperation(value = "用户发起退款售后订单")
+    public Result refundAfterSaleOrder(@RequestBody AfterSaleOrder afterSaleOrder) {
+        try {
+            orderService.refundAfterSaleOrder(afterSaleOrder);
+            return Result.success();
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();

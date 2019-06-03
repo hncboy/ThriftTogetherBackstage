@@ -148,6 +148,21 @@
             order_no = ${orderNo}
     </select>
 
-    
+    <!-- 插入售后订单 -->
+    <insert id="insertAfterSaleOrder" parameterType="afterSaleOrder">
+        INSERT INTO after_sale_order (
+            user_id,
+            order_no,
+            refund_reason,
+            refund_description,
+            certificate_image_url,
+            create_time )
+        VALUES ( ${afterSaleOrder.userId},
+            ${afterSaleOrder.orderNo},
+            #{afterSaleOrder.refundReason},
+            #{afterSaleOrder.refundDescription},
+            #{afterSaleOrder.certificateImageUrlList, typeHandler=com.pro516.thrifttogetherbackstage.handler.PictureListHandler},
+            now())
+    </insert>
 
 </mapper>

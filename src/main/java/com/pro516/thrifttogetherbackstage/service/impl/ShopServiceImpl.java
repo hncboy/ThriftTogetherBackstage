@@ -89,7 +89,7 @@ public class ShopServiceImpl implements ShopService {
         for (DiscoverShopVO discoverShopVO : discoverShopVOS) {
             double distance = DistanceUtil.getDistance(userLng, userLat, discoverShopVO.getLongitude(), discoverShopVO.getLatitude());
             BigDecimal bigDecimal = new BigDecimal(distance);
-            distance = bigDecimal.setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+            distance = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             discoverShopVO.setDistance(distance);
         }
         // 按距离升序

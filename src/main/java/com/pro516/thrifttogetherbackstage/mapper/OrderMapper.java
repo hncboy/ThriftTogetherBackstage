@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
+import com.pro516.thrifttogetherbackstage.entity.AfterSaleOrder;
 import com.pro516.thrifttogetherbackstage.entity.Order;
 import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.OrderDetailsVO;
@@ -65,4 +66,11 @@ public interface OrderMapper {
      * @return
      */
     OrderDetailsVO getDetailOrderByOrderNo(@Param("orderNo") Long orderNo);
+
+    /**
+     * 插入售后订单
+     *
+     * @param afterSaleOrder
+     */
+    void insertAfterSaleOrder(@Param("afterSaleOrder") AfterSaleOrder afterSaleOrder);
 }

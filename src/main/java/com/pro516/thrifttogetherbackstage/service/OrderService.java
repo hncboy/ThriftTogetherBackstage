@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.service;
 
+import com.pro516.thrifttogetherbackstage.entity.AfterSaleOrder;
 import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.OrderDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
@@ -61,4 +62,11 @@ public interface OrderService {
      * @return
      */
     OrderDetailsVO getDetailOrderByOrderNo(@Param("orderNo") Long orderNo);
+
+    /**
+     * 退款售后订单
+     *
+     * @param afterSaleOrder
+     */
+    void refundAfterSaleOrder(@Param("afterSaleOrder") AfterSaleOrder afterSaleOrder);
 }
