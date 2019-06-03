@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -49,8 +50,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<SimpleShopVO> listRecommendedDailyShops() {
-        return shopMapper.listRecommendedDailyShops();
+    public List<SimpleShopVO> listRecommendedDailyShopsByCityId(Integer cityId) {
+        return shopMapper.listRecommendedDailyShopsByCityId(cityId);
     }
 
     @Transactional
@@ -105,5 +106,25 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public List<ProductDetailsVO> listDetailProductsByShopId(Integer shopId) {
         return shopMapper.listDetailProductsByShopId(shopId);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<LookingAroundShopVO> listLookingAroundShops(Integer cityId, Integer userId) {
+        List<LookingAroundShopVO> lookingAroundShopVOS = shopMapper.listLookingAroundShops(cityId, userId);
+        // 添加团购名称集合
+        // 遍历所有店铺
+        for (LookingAroundShopVO lookingAroundShopVO : lookingAroundShopVOS) {
+            Integer shopId = lookingAroundShopVO.getShopId();
+            List<SimpleProductVO> simpleProductVOS =  shopMapper.listSimpleProductsByShopId(shopId);
+            // 遍历店铺的所有商品
+            List<String> productNames = new ArrayList<>();
+            for (SimpleProductVO simpleProductVO : simpleProductVOS) {
+                productNames.add(simpleProductVO.getProductName());
+            }
+            lookingAroundShopVO.setProductNameList(productNames);
+        }
+
+        return lookingAroundShopVOS;
     }
 }

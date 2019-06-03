@@ -83,7 +83,8 @@ public class OrderController {
     @ApiOperation(value = "用户创建订单")
     public Result createOrder(@RequestBody CreatedOrderVO createdOrderVO) {
         try {
-            return Result.success(orderService.createOrder(createdOrderVO));
+            Long orderNo = orderService.createOrder(createdOrderVO);
+            return Result.success(String.valueOf(orderNo));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();

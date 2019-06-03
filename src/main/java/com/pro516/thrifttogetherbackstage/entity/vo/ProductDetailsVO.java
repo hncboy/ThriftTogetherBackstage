@@ -25,6 +25,9 @@ public class ProductDetailsVO {
     @ApiModelProperty(value = "商品名称")
     private String productName;
 
+    @ApiModelProperty(value = "商品封面")
+    private String productCoverUrl;
+
     @ApiModelProperty(value = "店铺名称")
     private String shopName;
 

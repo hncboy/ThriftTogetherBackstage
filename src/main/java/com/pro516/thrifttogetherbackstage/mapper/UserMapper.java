@@ -44,6 +44,11 @@ public interface UserMapper {
      */
     void add(User user);
 
+    /**
+     * 更新用户头像
+     *
+     * @param map
+     */
     void updateUserAvator(Map<String, Object> map);
 
     /**

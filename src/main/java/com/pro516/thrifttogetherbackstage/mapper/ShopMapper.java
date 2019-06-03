@@ -56,11 +56,20 @@ public interface ShopMapper {
                                                 @Param("subdivisionId") Integer subdivisionId);
 
     /**
-     * 查询每日推荐的店铺
+     * 根据城市id获取每日推荐的店铺
      *
      * @return
      */
-    List<SimpleShopVO> listRecommendedDailyShops();
+    List<SimpleShopVO> listRecommendedDailyShopsByCityId(@Param("cityId") Integer cityId);
+
+    /**
+     * 根据城市id和用户id获取随便看看的店铺
+     *
+     * @param cityId
+     * @return
+     */
+    List<LookingAroundShopVO> listLookingAroundShops(@Param("cityId") Integer cityId,
+                                                     @Param("userId") Integer userId);
 
     /**
      * 根据店铺id查询简单店铺信息
@@ -81,7 +90,7 @@ public interface ShopMapper {
                                  @Param("userId") Integer userId);
 
     /**
-     * 根据店铺id查询改店铺的所有商品
+     * 根据店铺id查询该店铺的所有商品
      *
      * @param shopId
      * @return

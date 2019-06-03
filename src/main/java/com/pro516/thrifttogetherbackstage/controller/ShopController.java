@@ -64,12 +64,6 @@ public class ShopController {
         }
     }
 
-    @GetMapping("/recommend")
-    @ApiOperation(value = "查询每日推荐的店铺")
-    public Result listRecommendedDailyShops() {
-        return Result.success(shopService.listRecommendedDailyShops());
-    }
-
     @GetMapping("/{shopId}/user/{userId}")
     @ApiOperation(value = "根据用户id和店铺id查询店铺详情")
     public Result getShopDetails(
@@ -103,6 +97,28 @@ public class ShopController {
 
         try {
             return Result.success(shopService.listDetailProductsByShopId(shopId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
+
+    @GetMapping("/city/{cityId}/recommend")
+    @ApiOperation(value = "根据城市id获取每日推荐的店铺")
+    public Result listRecommendedDailyShopsByCityId(
+            @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId) {
+        // TODO 城市id还没用
+        return Result.success(shopService.listRecommendedDailyShopsByCityId(cityId));
+    }
+
+    @GetMapping("/city/{cityId}/user/{userId}/lookingaround")
+    @ApiOperation(value = "根据城市id和用户id获取随便看看的店铺")
+    public Result listLookingAroundShops(
+            @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId,
+            @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
+
+        try {
+            return Result.success(shopService.listLookingAroundShops(cityId, userId));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();

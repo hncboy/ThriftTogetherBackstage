@@ -106,6 +106,7 @@ public class OrderServiceImpl implements OrderService {
         return orderNo;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public OrderDetailsVO getDetailOrderByOrderNo(Long orderNo) {
         OrderDetailsVO orderDetailsVO = orderMapper.getDetailOrderByOrderNo(orderNo);
@@ -121,6 +122,14 @@ public class OrderServiceImpl implements OrderService {
         // 2.2根据优惠券id查询优惠券折扣价格
         Integer discountedPrice = couponMapper.getCouponDetailsByCouponId(userCoupon.getCouponId()).getCouponDiscountedPrice();
         orderDetailsVO.setDiscountedPrice(discountedPrice);
+
+        // 3.添加商品所属店铺名称
+        // 3.1根据商品查询店铺id
+        Integer shopId = product.getShopId();
+        // 3.2根据店铺id查询店铺信息
+        SimpleShopVO simpleShopVO = shopMapper.getSimpleShopByShopId(shopId);
+        // 3.3传入店铺名称
+        orderDetailsVO.setShopName(simpleShopVO.getShopName());
 
         return orderDetailsVO;
     }

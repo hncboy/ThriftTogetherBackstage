@@ -4,6 +4,18 @@
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.ShopMapper">
 
+    <resultMap id="lookingAroundShopResultMap" type="LookingAroundShopVO">
+        <result column="shop_id" property="shopId"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="shop_cover_url" property="shopCoverUrl"/>
+        <result column="average_score" property="averageScore"/>
+        <result column="average_price" property="averagePrice"/>
+        <result column="shop_area" property="shopArea"/>
+        <result column="shop_address" property="shopAddress"/>
+        <result column="city_id" property="cityId"/>
+        <result column="is_collected" property="isCollected"/>
+    </resultMap>
+
     <resultMap id="productResultMap" type="Product">
         <result column="id" property="productId"/>
         <result column="shop_id" property="shopId"/>
@@ -22,6 +34,7 @@
     <resultMap id="productDetailsResultMap" type="ProductDetailsVO">
         <result column="product_id" property="productId"/>
         <result column="product_name" property="productName"/>
+        <result column="product_cover_url" property="productCoverUrl"/>
         <result column="shop_name" property="shopName"/>
         <result column="product_tags" property="productTags" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
         <result column="product_content" property="productContent" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
@@ -99,9 +112,28 @@
         <include refid="listSimpleShopInfo"/> where city_id = #{cityId} and category_id = #{categoryId} and subdivision_id = #{subdivisionId}
     </select>
 
-    <!-- 查询每日推荐的店铺 -->
-    <select id="listRecommendedDailyShops" resultMap="simpleShopResultMap">
-        <include refid="listSimpleShopInfo"/> where id in (select shop_id from recommended_daily where (day(now()) - day(update_date)) = 0)
+    <!-- 根据城市id获取每日推荐的店铺 -->
+    <select id="listRecommendedDailyShopsByCityId" parameterType="Integer" resultMap="simpleShopResultMap">
+        <include refid="listSimpleShopInfo"/> where id in (select shop_id from recommended_daily where (day(now()) - day(update_date)) = 0) and city_id = ${cityId}
+    </select>
+
+    <!-- 根据城市id获取随便看看的店铺 -->
+    <select id="listLookingAroundShops" parameterType="Integer" resultMap="lookingAroundShopResultMap">
+        SELECT
+            id AS shop_id,
+            shop_name,
+            cover_url AS shop_cover_url,
+            average_score,
+            average_price,
+            shop_area,
+            shop_address,
+            city_id,
+            ( SELECT count(*) FROM collection WHERE shop_id = shop.id AND user_id = ${userId} AND type = 1 ) AS is_collected
+        FROM
+            shop
+        WHERE
+            city_id = ${cityId}
+            LIMIT 0, 18
     </select>
 
     <!-- 根据店铺id查询简单店铺信息 -->
@@ -190,6 +222,7 @@
         SELECT
             id AS product_id,
             product_name,
+            cover_url as product_cover_url,
             ( SELECT shop_name FROM shop WHERE id = 1 ) AS shop_name,
             product_tags,
             product_content,

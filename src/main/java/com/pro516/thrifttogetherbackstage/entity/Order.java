@@ -1,5 +1,7 @@
 package com.pro516.thrifttogetherbackstage.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -18,6 +20,7 @@ import java.util.Date;
 @ApiModel(value = "Order 订单（内部使用）")
 public class Order {
 
+    @JsonSerialize(using = ToStringSerializer.class)
     @ApiModelProperty(value = "订单号")
     private Long orderNo;
 

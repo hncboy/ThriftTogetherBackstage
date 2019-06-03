@@ -2,6 +2,8 @@ package com.pro516.thrifttogetherbackstage.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -21,12 +23,16 @@ import java.util.Date;
 @ApiModel(value = "OrderDetailsVO 订单详情")
 public class OrderDetailsVO {
 
+    @JsonSerialize(using = ToStringSerializer.class)
     @ApiModelProperty(value = "订单号")
     private Long orderNo;
 
     @JsonIgnore
     @ApiModelProperty(value = "购买商品id")
     private Integer productId;
+
+    @ApiModelProperty(value = "购买商品的店铺")
+    private String shopName;
 
     @ApiModelProperty(value = "购买商品名称")
     private String productName;

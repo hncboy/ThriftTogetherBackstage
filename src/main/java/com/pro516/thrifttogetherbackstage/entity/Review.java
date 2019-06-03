@@ -1,6 +1,8 @@
 package com.pro516.thrifttogetherbackstage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -36,6 +38,7 @@ public class Review {
     @ApiModelProperty(value = "评价商品id")
     private Integer productId;
 
+    @JsonSerialize(using = ToStringSerializer.class)
     @ApiModelProperty(value = "评价订单号")
     private Long orderNo;
 
