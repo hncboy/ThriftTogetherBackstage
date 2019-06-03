@@ -104,8 +104,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Transactional
     @Override
-    public List<ProductDetailsVO> listDetailProductsByShopId(Integer shopId) {
-        return shopMapper.listDetailProductsByShopId(shopId);
+    public List<ProductDetailsVO> listDetailProducts(Integer shopId, Integer userId) {
+        return shopMapper.listDetailProducts(shopId, userId);
     }
 
     @Transactional(readOnly = true)

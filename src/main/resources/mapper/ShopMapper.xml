@@ -43,6 +43,7 @@
         <result column="product_original_price" property="productOriginalPrice"/>
         <result column="product_discount" property="productDiscount"/>
         <result column="product_sales" property="productSales"/>
+        <result column="is_collected" property="isCollected"/>
     </resultMap>
 
     <resultMap id="discoverShopResultMap" type="DiscoverShopVO">
@@ -150,7 +151,7 @@
             average_score AS shop_average_score,
             average_price AS shop_average_price,
             shop_address,
-            ( SELECT count(*) FROM collection WHERE shop_id = ${shopId} AND user_id = ${userId} AND type = 1 ) AS is_collected
+            ( SELECT count(*) FROM collection WHERE shop_id = shop.id AND user_id = ${userId} AND type = 1 ) AS is_collected
         FROM
             shop
         WHERE
@@ -217,8 +218,8 @@
 	        city_id = ${cityId}
     </select>
 
-    <!-- 根据店铺id查询店铺商品详情列表 -->
-    <select id="listDetailProductsByShopId" parameterType="Integer" resultMap="productDetailsResultMap">
+    <!-- 根据店铺id和用户id查询店铺商品详情列表 -->
+    <select id="listDetailProducts" parameterType="Integer" resultMap="productDetailsResultMap">
         SELECT
             id AS product_id,
             product_name,
@@ -230,7 +231,8 @@
             product_price,
             product_original_price,
             product_discount,
-            product_sales
+            product_sales,
+            ( SELECT count(*) FROM collection WHERE product_id = product.id AND user_id = ${userId} AND type = 2 ) AS is_collected
         FROM
             product
         WHERE

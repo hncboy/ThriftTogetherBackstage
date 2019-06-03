@@ -29,7 +29,7 @@ public class SearchController {
             @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId,
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId,
             @ApiParam(value = "起始页 默认0", name = "start") @RequestParam(value = "start", defaultValue = "0") Integer start,
-            @ApiParam(value = "每页多少条 默认20", name = "size") @RequestParam(value = "size", defaultValue = "20") Integer size) {
+            @ApiParam(value = "每页多少条 默认50", name = "size") @RequestParam(value = "size", defaultValue = "100") Integer size) {
 
         try {
             return Result.success(searchService.searchShops(cityId, userId, keyword, start, size));
@@ -46,7 +46,7 @@ public class SearchController {
             @ApiParam(value = "用户id", name = "userId") @PathVariable("userId") Integer userId) {
 
         try {
-            return Result.success(searchService.listUserSearchRecords(cityId, userId, 10));
+            return Result.success(searchService.listUserSearchRecords(cityId, userId, 9));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();
@@ -59,7 +59,7 @@ public class SearchController {
             @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId) {
 
         try {
-            return Result.success(searchService.listHotSearchRecords(cityId, 10));
+            return Result.success(searchService.listHotSearchRecords(cityId, 9));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure();

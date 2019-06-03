@@ -82,10 +82,10 @@ public interface ShopService {
     List<DiscoverShopVO> listDiscoverShops(Integer cityId, Double userLng, Double userLat, Integer start, Integer size);
 
     /**
-     * 根据店铺id查询店铺商品详情列表
+     * 根据店铺id和用户id查询店铺商品详情列表
      *
      * @param shopId
      * @return
      */
-    List<ProductDetailsVO> listDetailProductsByShopId(Integer shopId);
+    List<ProductDetailsVO> listDetailProducts(Integer shopId, Integer userId);
 }

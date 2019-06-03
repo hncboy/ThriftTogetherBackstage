@@ -133,12 +133,13 @@ public interface ShopMapper {
     List<DiscoverShopVO> listDiscoverShopsByCityId(@Param("cityId") Integer cityId);
 
     /**
-     * 根据店铺id查询店铺商品详情列表
+     * 根据店铺id和用户id查询店铺商品详情列表
      *
      * @param shopId
      * @return
      */
-    List<ProductDetailsVO> listDetailProductsByShopId(@Param("shopId") Integer shopId);
+    List<ProductDetailsVO> listDetailProducts(@Param("shopId") Integer shopId,
+                                                      @Param("userId") Integer userId);
 
     /**
      * 根据商品id查询商品

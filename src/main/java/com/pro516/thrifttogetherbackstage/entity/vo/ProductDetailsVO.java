@@ -51,4 +51,7 @@ public class ProductDetailsVO {
 
     @ApiModelProperty(value = "商品销量")
     private Integer productSales;
+
+    @ApiModelProperty(value = "用户是否收藏 0不收藏 1收藏")
+    private Integer isCollected;
 }
