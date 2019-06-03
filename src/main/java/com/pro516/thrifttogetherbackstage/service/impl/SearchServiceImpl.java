@@ -57,8 +57,9 @@ public class SearchServiceImpl implements SearchService {
         map.put("keyword", keyword);
         searchMapper.insertSearchRecord(map);
 
-        // FIXME 先全部插入，再插入全部数据
-        shopRepository.deleteAll();
+        // FIXME 先全部删除，再插入全部数据
+        // 目前不再更新商品数据
+        //shopRepository.deleteAll();
         List<SimpleShopVO> simpleShopVOList = shopMapper.listShops();
         shopRepository.saveAll(simpleShopVOList);
 

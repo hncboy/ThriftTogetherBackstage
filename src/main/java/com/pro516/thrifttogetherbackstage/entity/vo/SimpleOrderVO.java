@@ -25,8 +25,8 @@ public class SimpleOrderVO {
     @ApiModelProperty(value = "订单号")
     private Long orderNo;
 
-    @ApiModelProperty(value = "店铺类型")
-    private Integer shopCategoryId;
+    @ApiModelProperty(value = "店铺类型图标url")
+    private String shopCategoryIconUrl;
 
     @ApiModelProperty(value = "商品名称")
     private String productName;

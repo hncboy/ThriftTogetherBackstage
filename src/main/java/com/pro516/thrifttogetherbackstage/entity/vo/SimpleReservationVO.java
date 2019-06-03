@@ -31,10 +31,13 @@ public class SimpleReservationVO {
     @ApiModelProperty(value = "预约店铺区域")
     private String shopArea;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @ApiModelProperty(value = "预约时间")
     private Date reserveTime;
 
     @ApiModelProperty(value = "预定人数")
     private Integer reservationPeopleNum;
+
+    @ApiModelProperty(value = "预约状态  0预约中 1已取消 2已过期")
+    private Integer reservationStatus;
 }

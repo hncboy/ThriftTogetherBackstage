@@ -116,12 +116,15 @@ public class OrderServiceImpl implements OrderService {
         orderDetailsVO.setProductName(product.getProductName());
         orderDetailsVO.setProductCoverUrl(product.getProductCoverUrl());
 
-        // 2.添加优惠券折扣价格
-        // 2.1根据用户优惠券id查询用户优惠券详情
-        UserCoupon userCoupon = couponMapper.getUserCouponByUserCouponId(orderDetailsVO.getUserCouponId());
-        // 2.2根据优惠券id查询优惠券折扣价格
-        Integer discountedPrice = couponMapper.getCouponDetailsByCouponId(userCoupon.getCouponId()).getCouponDiscountedPrice();
-        orderDetailsVO.setDiscountedPrice(discountedPrice);
+        // 有优惠券
+        if (orderDetailsVO.getIsUseCoupon() == 1) {
+            // 2.添加优惠券折扣价格
+            // 2.1根据用户优惠券id查询用户优惠券详情
+            UserCoupon userCoupon = couponMapper.getUserCouponByUserCouponId(orderDetailsVO.getUserCouponId());
+            // 2.2根据优惠券id查询优惠券折扣价格
+            Integer discountedPrice = couponMapper.getCouponDetailsByCouponId(userCoupon.getCouponId()).getCouponDiscountedPrice();
+            orderDetailsVO.setDiscountedPrice(discountedPrice);
+        }
 
         // 3.添加商品所属店铺名称
         // 3.1根据商品查询店铺id

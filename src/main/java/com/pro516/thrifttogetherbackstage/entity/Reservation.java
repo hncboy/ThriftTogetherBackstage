@@ -27,6 +27,7 @@ public class Reservation {
     private Integer shopId;
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     @ApiModelProperty(value = "预定时间")
     private Date reserveTime;
 

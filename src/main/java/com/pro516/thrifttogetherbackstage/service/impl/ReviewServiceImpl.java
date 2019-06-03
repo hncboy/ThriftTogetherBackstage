@@ -40,21 +40,24 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     @Override
     public void reviewOrder(Review review) {
-        // 修改订单状态
+        // 1.修改订单状态
         Order order = orderMapper.getOrderByOrderNo(review.getOrderNo());
         order.setOrderStatus(4);
         order.setReviewTime(new Date());
         orderMapper.updateOrderStatus(order);
 
-        // 添加评价
+        // 2.添加评价
         review.setProductId(order.getProductId());
         review.setShopId(shopMapper.getShopIdByProductId(review.getProductId()));
         reviewMapper.reviewOrder(review);
 
-        // 根据评价的订单总价获取10%积分
+        // 3.根据评价的订单总价获取10%积分
         Integer userId = review.getUserId();
         User user = userMapper.findUserByUserId(userId);
         couponMapper.updateUserIntegral(userId, user.getIntegral() + (int) Math.rint(order.getProductAmountTotal() / 10));
+
+        // 4.增加销售量
+        // TODO
     }
 
     @Transactional(readOnly = true)

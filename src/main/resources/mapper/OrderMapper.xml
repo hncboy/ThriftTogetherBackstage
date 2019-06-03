@@ -39,7 +39,7 @@
 
     <resultMap id="simpleOrderResultMap" type="SimpleOrderVO">
         <result column="order_no" property="orderNo"/>
-        <result column="shop_category_id" property="shopCategoryId"/>
+        <result column="shop_category_icon_url" property="shopCategoryIconUrl"/>
         <result column="product_name" property="productName"/>
         <result column="shop_id" property="shopId"/>
         <result column="product_cover_url" property="productCoverUrl"/>
@@ -52,7 +52,7 @@
     <select id="listOrdersByStatus" parameterType="Integer" resultMap="simpleOrderResultMap">
         SELECT
             order_no,
-            category_id AS shop_category_id,
+            ( SELECT icon_url FROM category WHERE id = category_id ) AS shop_category_icon_url,
             product_name,
             product.shop_id,
             product.cover_url AS product_cover_url,
@@ -96,7 +96,7 @@
         select * from order_ where order_no = ${orderNo}
     </select>
 
-    <!--评价订单-->
+    <!-- 创建订单 -->
     <insert id="insertOrder" parameterType="createdOrderVO">
         INSERT INTO order_ (
             order_no,

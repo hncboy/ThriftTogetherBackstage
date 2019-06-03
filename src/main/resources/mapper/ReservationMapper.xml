@@ -11,6 +11,7 @@
         <result column="shop_area" property="shopArea"/>
         <result column="reserve_time" property="reserveTime"/>
         <result column="reservation_people_num" property="reservationPeopleNum"/>
+        <result column="reservation_status" property="reservationStatus"/>
     </resultMap>
 
     <!-- 添加预约 -->
@@ -43,7 +44,8 @@
             ( SELECT shop_name FROM shop WHERE id = shop_id ) AS shop_name,
             ( SELECT shop_area FROM shop WHERE id = shop_id ) AS shop_area,
             reserve_time,
-            reservation_people_num
+            reservation_people_num,
+            reservation_status
         FROM
             reservation
         WHERE

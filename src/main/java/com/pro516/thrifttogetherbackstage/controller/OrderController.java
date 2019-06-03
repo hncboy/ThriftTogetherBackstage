@@ -82,6 +82,7 @@ public class OrderController {
     @PostMapping
     @ApiOperation(value = "用户创建订单")
     public Result createOrder(@RequestBody CreatedOrderVO createdOrderVO) {
+
         try {
             Long orderNo = orderService.createOrder(createdOrderVO);
             return Result.success(String.valueOf(orderNo));
