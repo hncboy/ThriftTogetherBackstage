@@ -1,7 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
 import com.pro516.thrifttogetherbackstage.entity.Result;
-import com.pro516.thrifttogetherbackstage.entity.UserCoupon;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleUserCouponVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleCouponVO;
 import com.pro516.thrifttogetherbackstage.mapper.CouponMapper;
@@ -47,9 +47,9 @@ public class CouponServiceImpl implements CouponService {
 
     @Transactional
     @Override
-    public List<UserCoupon> listUserCouponsByUserId(Integer userId) {
+    public List<SimpleUserCouponVO> listUserCouponsByUserId(Integer userId) {
         couponMapper.updateUserCouponStatus(userId); // 更新用户领取的优惠券状态
-        List<UserCoupon> userCoupons = new ArrayList<>();
+        List<SimpleUserCouponVO> userCoupons = new ArrayList<>();
         userCoupons.addAll(couponMapper.listUserCoupons(userId, 2));
         userCoupons.addAll(couponMapper.listUserCoupons(userId, 1));
         userCoupons.addAll(couponMapper.listUserCoupons(userId, 3));

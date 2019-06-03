@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
-@ApiModel(value = "Order 订单")
+@ApiModel(value = "Order 订单（内部使用）")
 public class Order {
 
     @ApiModelProperty(value = "订单号")

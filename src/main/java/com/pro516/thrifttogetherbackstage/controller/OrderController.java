@@ -89,4 +89,17 @@ public class OrderController {
             return Result.failure();
         }
     }
+
+    @GetMapping("/{orderNo}")
+    @ApiOperation(value = "根据订单号获取订单详细信息")
+    public Result getDetailOrderByOrderNo(
+            @ApiParam(value = "订单号", name = "orderNo") @PathVariable("orderNo") Long orderNo) {
+
+        try {
+            return Result.success(orderService.getDetailOrderByOrderNo(orderNo));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
 }

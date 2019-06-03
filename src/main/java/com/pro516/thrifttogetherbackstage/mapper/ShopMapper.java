@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
+import com.pro516.thrifttogetherbackstage.entity.Product;
 import com.pro516.thrifttogetherbackstage.entity.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -129,4 +130,12 @@ public interface ShopMapper {
      * @return
      */
     List<ProductDetailsVO> listDetailProductsByShopId(@Param("shopId") Integer shopId);
+
+    /**
+     * 根据商品id查询商品
+     *
+     * @param productId
+     * @return
+     */
+    Product getProductByProductId(@Param("productId") Integer productId);
 }

@@ -4,6 +4,24 @@
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.OrderMapper">
 
+    <resultMap id="orderDetailsResultMap" type="OrderDetailsVO">
+        <result column="order_no" property="orderNo"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_buy_price" property="productBuyPrice"/>
+        <result column="product_count" property="productCount"/>
+        <result column="is_use_coupon" property="isUseCoupon"/>
+        <result column="user_coupon_id" property="userCouponId"/>
+        <result column="product_amount_total" property="productAmountTotal"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="payment_method" property="paymentMethod"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="use_time" property="useTime"/>
+        <result column="review_time" property="reviewTime"/>
+        <result column="after_sale_time" property="afterSaleTime"/>
+    </resultMap>
+
     <resultMap id="orderResultMap" type="Order">
         <result column="order_no" property="orderNo"/>
         <result column="user_id" property="userId"/>
@@ -105,5 +123,31 @@
             #{createdOrderVO.contactPhone},
             1, now(), 0)
     </insert>
+
+    <!-- 根据订单号获取订单详细信息 -->
+    <select id="getDetailOrderByOrderNo" parameterType="Integer" resultMap="orderDetailsResultMap">
+        SELECT
+            order_no,
+            product_id,
+            product_buy_price,
+            product_count,
+            is_use_coupon,
+            user_coupon_id,
+            product_amount_total,
+            contact_phone,
+            payment_method,
+            order_status,
+            create_time,
+            pay_time,
+            use_time,
+            review_time,
+            after_sale_time
+        FROM
+            order_
+        WHERE
+            order_no = ${orderNo}
+    </select>
+
+    
 
 </mapper>

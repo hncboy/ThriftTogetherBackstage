@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.service;
 
 import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.OrderDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,4 +53,12 @@ public interface OrderService {
      * @return 返回订单号
      */
     Long createOrder(CreatedOrderVO createdOrderVO);
+
+    /**
+     * 根据订单号获取订单详细信息
+     *
+     * @param orderNo
+     * @return
+     */
+    OrderDetailsVO getDetailOrderByOrderNo(@Param("orderNo") Long orderNo);
 }

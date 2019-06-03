@@ -1,11 +1,12 @@
 package com.pro516.thrifttogetherbackstage.service.impl;
 
 import com.pro516.thrifttogetherbackstage.entity.Order;
-import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
-import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
+import com.pro516.thrifttogetherbackstage.entity.Product;
+import com.pro516.thrifttogetherbackstage.entity.UserCoupon;
+import com.pro516.thrifttogetherbackstage.entity.vo.*;
 import com.pro516.thrifttogetherbackstage.mapper.CouponMapper;
 import com.pro516.thrifttogetherbackstage.mapper.OrderMapper;
+import com.pro516.thrifttogetherbackstage.mapper.ShopMapper;
 import com.pro516.thrifttogetherbackstage.service.OrderService;
 import com.pro516.thrifttogetherbackstage.util.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private CouponMapper couponMapper;
+
+    @Autowired
+    private ShopMapper shopMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -100,5 +104,24 @@ public class OrderServiceImpl implements OrderService {
             createdOrderVO.setUserCouponId(0);
         }
         return orderNo;
+    }
+
+    @Override
+    public OrderDetailsVO getDetailOrderByOrderNo(Long orderNo) {
+        OrderDetailsVO orderDetailsVO = orderMapper.getDetailOrderByOrderNo(orderNo);
+        // 1.添加商品名称，商品封面
+        // 1.1 根据商品id查询商品
+        Product product = shopMapper.getProductByProductId(orderDetailsVO.getProductId());
+        orderDetailsVO.setProductName(product.getProductName());
+        orderDetailsVO.setProductCoverUrl(product.getProductCoverUrl());
+
+        // 2.添加优惠券折扣价格
+        // 2.1根据用户优惠券id查询用户优惠券详情
+        UserCoupon userCoupon = couponMapper.getUserCouponByUserCouponId(orderDetailsVO.getUserCouponId());
+        // 2.2根据优惠券id查询优惠券折扣价格
+        Integer discountedPrice = couponMapper.getCouponDetailsByCouponId(userCoupon.getCouponId()).getCouponDiscountedPrice();
+        orderDetailsVO.setDiscountedPrice(discountedPrice);
+
+        return orderDetailsVO;
     }
 }

@@ -2,6 +2,7 @@ package com.pro516.thrifttogetherbackstage.mapper;
 
 import com.pro516.thrifttogetherbackstage.entity.Order;
 import com.pro516.thrifttogetherbackstage.entity.vo.CreatedOrderVO;
+import com.pro516.thrifttogetherbackstage.entity.vo.OrderDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleOrderVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -43,7 +44,7 @@ public interface OrderMapper {
     void updateOrderStatus(Order order);
 
     /**
-     * 根据订单号获取订单详细信息
+     * 根据订单号获取订单信息
      *
      * @param orderNo
      * @return
@@ -56,4 +57,12 @@ public interface OrderMapper {
      * @param createdOrderVO
      */
     void insertOrder(@Param("createdOrderVO") CreatedOrderVO createdOrderVO);
+
+    /**
+     * 根据订单号获取订单详细信息
+     *
+     * @param orderNo
+     * @return
+     */
+    OrderDetailsVO getDetailOrderByOrderNo(@Param("orderNo") Long orderNo);
 }

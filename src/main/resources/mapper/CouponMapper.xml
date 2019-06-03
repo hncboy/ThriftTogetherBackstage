@@ -11,6 +11,16 @@
         <result column="coupon_image_url" property="couponImageUrl"/>
     </resultMap>
 
+    <resultMap id="userCouponResultMap" type="UserCoupon">
+        <result column="id" property="userCouponId"/>
+        <result column="user_id" property="userId"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="receive_time" property="receiveTime"/>
+        <result column="use_time" property="useTime"/>
+        <result column="use_order_no" property="useOrderNo"/>
+        <result column="user_coupon_status" property="userCouponStatus"/>
+    </resultMap>
+
     <resultMap id="couponDetailsResultMap" type="CouponDetailsVO">
         <result column="id" property="couponId"/>
         <result column="coupon_integral" property="couponIntegral"/>
@@ -19,7 +29,7 @@
         <result column="expired_date" property="expiredDate"/>
     </resultMap>
 
-    <resultMap id="userCouponResultMap" type="UserCoupon">
+    <resultMap id="simpleUserCouponResultMap" type="SimpleUserCouponVO">
         <result column="id" property="userCouponId"/>
         <result column="coupon_image_url" property="couponImageUrl"/>
         <result column="coupon_name" property="couponName"/>
@@ -58,7 +68,7 @@
     </select>
 
     <!-- 根据用户id和用户优惠券状态查询领取的优惠券 -->
-    <select id="listUserCoupons" parameterType="Integer" resultMap="userCouponResultMap">
+    <select id="listUserCoupons" parameterType="Integer" resultMap="simpleUserCouponResultMap">
         SELECT
             id,
             ( SELECT coupon_name FROM coupon WHERE coupon_id = id ) as coupon_name,
@@ -117,5 +127,10 @@
             id = ${userCouponId}
             AND user_coupon_status = 2
     </update>
+
+    <!-- 根据用户优惠券id查询用户优惠券详情-->
+    <select id="getUserCouponByUserCouponId" parameterType="Integer" resultMap="userCouponResultMap">
+        SELECT * FROM user_coupon  WHERE id = ${userCouponId}
+    </select>
 
 </mapper>

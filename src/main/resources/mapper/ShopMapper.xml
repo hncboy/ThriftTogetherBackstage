@@ -4,6 +4,21 @@
 
 <mapper namespace="com.pro516.thrifttogetherbackstage.mapper.ShopMapper">
 
+    <resultMap id="productResultMap" type="Product">
+        <result column="id" property="productId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_tags" property="productTags" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
+        <result column="product_content" property="productContent" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
+        <result column="product_reminder" property="productReminder" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
+        <result column="cover_url" property="productCoverUrl"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="product_original_price" property="productOriginalPrice"/>
+        <result column="product_discount" property="productDiscount"/>
+        <result column="product_sales" property="productSales"/>
+        <result column="product_use_time" property="productUseTime"/>
+    </resultMap>
+
     <resultMap id="productDetailsResultMap" type="ProductDetailsVO">
         <result column="product_id" property="productId"/>
         <result column="product_name" property="productName"/>
@@ -189,6 +204,11 @@
             shop_id = ${shopId}
         ORDER BY
             publish_time DESC
+    </select>
+
+    <!-- 根据商品id查询商品 -->
+    <select id="getProductByProductId" parameterType="Integer" resultMap="productResultMap">
+        select * from product where id = ${productId}
     </select>
 
 </mapper>

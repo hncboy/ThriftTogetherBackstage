@@ -1,6 +1,7 @@
 package com.pro516.thrifttogetherbackstage.mapper;
 
 import com.pro516.thrifttogetherbackstage.entity.UserCoupon;
+import com.pro516.thrifttogetherbackstage.entity.vo.SimpleUserCouponVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.CouponDetailsVO;
 import com.pro516.thrifttogetherbackstage.entity.vo.SimpleCouponVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -41,8 +42,8 @@ public interface CouponMapper {
      * @param userCouponStatus
      * @return
      */
-    List<UserCoupon> listUserCoupons(@Param("userId") Integer userId,
-                                     @Param("userCouponStatus") Integer userCouponStatus);
+    List<SimpleUserCouponVO> listUserCoupons(@Param("userId") Integer userId,
+                                             @Param("userCouponStatus") Integer userCouponStatus);
 
     /**
      * 更新优惠券状态
@@ -90,4 +91,12 @@ public interface CouponMapper {
      */
     void userUseCoupon(@Param("orderNo") Long orderNo,
                        @Param("userCouponId") Integer userCouponId);
+
+    /**
+     * 根据用户优惠券id查询用户优惠券详情
+     *
+     * @param userCouponId
+     * @return
+     */
+    UserCoupon getUserCouponByUserCouponId(@Param("userCouponId") Integer userCouponId);
 }
