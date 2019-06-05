@@ -14,6 +14,8 @@
     </resultMap>
 
     <resultMap id="collectProductResultMap" type="CollectedProductVO">
+        <result column="id" property="productId"/>
+        <result column="shop_id" property="shopId"/>
         <result column="product_name" property="productName"/>
         <result column="cover_url" property="coverUrl"/>
         <result column="product_price" property="productPrice"/>
@@ -67,6 +69,7 @@
     <select id="listProductsByUserId" parameterType="Integer" resultMap="collectProductResultMap">
         SELECT
             product.id,
+            product.shop_id,
             product_name,
             product.cover_url,
             product_price,

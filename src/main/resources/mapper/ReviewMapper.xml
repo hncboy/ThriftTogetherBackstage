@@ -7,6 +7,7 @@
     <resultMap id="simpleReviewResultMap" type="SimpleReviewVO">
         <result column="review_id" property="reviewId"/>
         <result column="avator_url" property="avatorUrl"/>
+        <result column="product_name" property="productName"/>
         <result column="username" property="username"/>
         <result column="review_content" property="reviewContent"/>
         <result column="review_pic_url" property="reviewPicUrlList" typeHandler="com.pro516.thrifttogetherbackstage.handler.PictureListHandler"/>
@@ -27,9 +28,11 @@
             now())
     </insert>
 
+    <!-- 根据商品id获取评价信息 -->
     <select id="listReviewsByShopId" parameterType="Integer" resultMap="simpleReviewResultMap">
         SELECT
             review_id,
+            ( SELECT product_name FROM product WHERE id = product_id ) AS product_name,
             ( SELECT username FROM USER WHERE id = user_id ) AS username,
             ( SELECT avator_url FROM USER WHERE id = user_id ) AS avator_url,
             review_content,
@@ -43,4 +46,5 @@
         ORDER BY
             review_time DESC
     </select>
+
 </mapper>

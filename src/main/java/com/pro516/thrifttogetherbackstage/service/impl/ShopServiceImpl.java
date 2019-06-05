@@ -116,7 +116,7 @@ public class ShopServiceImpl implements ShopService {
         // 遍历所有店铺
         for (LookingAroundShopVO lookingAroundShopVO : lookingAroundShopVOS) {
             Integer shopId = lookingAroundShopVO.getShopId();
-            List<SimpleProductVO> simpleProductVOS =  shopMapper.listSimpleProductsByShopId(shopId);
+            List<SimpleProductVO> simpleProductVOS = shopMapper.listSimpleProductsByShopId(shopId);
             // 遍历店铺的所有商品
             List<String> productNames = new ArrayList<>();
             for (SimpleProductVO simpleProductVO : simpleProductVOS) {

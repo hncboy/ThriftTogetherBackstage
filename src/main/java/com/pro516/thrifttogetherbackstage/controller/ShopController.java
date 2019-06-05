@@ -79,7 +79,7 @@ public class ShopController {
             @ApiParam(value = "城市id", name = "cityId") @PathVariable("cityId") Integer cityId,
             @ApiParam(value = "用户所在纬度", name = "userLat") @PathVariable("userLat") Double userLat,
             @ApiParam(value = "用户所在经度", name = "userLng") @PathVariable("userLng") Double userLng,
-            @ApiParam(value = "起始页 默认0", name = "start") @RequestParam(value = "start", defaultValue = "0") Integer start,
+            @ApiParam(value = "起始页 默认1", name = "start") @RequestParam(value = "start", defaultValue = "1") Integer start,
             @ApiParam(value = "每页多少条 默认20", name = "size") @RequestParam(value = "size", defaultValue = "20") Integer size) {
 
         try {

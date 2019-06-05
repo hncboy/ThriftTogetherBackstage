@@ -17,7 +17,10 @@ import lombok.Setter;
 public class CollectedProductVO {
 
     @ApiModelProperty(value = "商品id")
-    private Integer id;
+    private Integer productId;
+
+    @ApiModelProperty(value = "店铺id")
+    private Integer shopId;
 
     @ApiModelProperty(value = "商品名称")
     private String productName;

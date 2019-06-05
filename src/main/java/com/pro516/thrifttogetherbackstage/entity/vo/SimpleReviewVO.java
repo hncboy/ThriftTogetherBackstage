@@ -29,6 +29,9 @@ public class SimpleReviewVO {
     @ApiModelProperty(value = "用户头像")
     private String avatorUrl;
 
+    @ApiModelProperty(value = "团购商品名称")
+    private String productName;
+
     @ApiModelProperty(value = "评价内容")
     private String reviewContent;
 

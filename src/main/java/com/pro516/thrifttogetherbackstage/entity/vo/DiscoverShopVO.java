@@ -38,7 +38,7 @@ public class DiscoverShopVO {
     @ApiModelProperty(value = "店铺位置")
     private String shopAddress;
 
-    @ApiModelProperty(value = "经度")
+    @ApiModelProperty(value = "经度   ")
     private Double longitude;
 
     @ApiModelProperty(value = "纬度")

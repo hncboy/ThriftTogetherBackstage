@@ -1,5 +1,6 @@
 package com.pro516.thrifttogetherbackstage.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pro516.thrifttogetherbackstage.entity.Result;
 import com.pro516.thrifttogetherbackstage.service.UserService;
 import com.pro516.thrifttogetherbackstage.config.CosCloud;
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.InputStream;
 
@@ -66,6 +68,7 @@ public class UserController {
         }
     }
 
+    @ApiIgnore
     @PostMapping(value = "/uploadPic", headers = "content-type=multipart/form-data")
     @ApiOperation(value = "上传图片返回url")
     public Result uploadPic(MultipartFile file) {

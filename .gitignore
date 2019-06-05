@@ -35,3 +35,4 @@ HELP.md
 /src/main/resources/application-test.yml
 /src/main/java/com/pro516/thrifttogetherbackstage/config/CosCloud.java
 /src/main/resources/config.properties
+/src/main/java/com/pro516/thrifttogetherbackstage/util/ListUtil.java
